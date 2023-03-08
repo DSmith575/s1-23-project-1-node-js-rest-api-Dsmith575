@@ -7,9 +7,10 @@ import {
   createInstitution,
   updateInstitution,
   deleteInstitution,
+  getInstitution,
 } from "../controllers/institutions.js";
 
 router.route("/").get(getInstitutions).post(createInstitution)
-router.route("/:id").put(updateInstitution).delete(deleteInstitution)
+router.route("/:id").put(updateInstitution).delete(deleteInstitution).get(getInstitution)
 
 export default router; // You do not need to enclose router in curly braces
