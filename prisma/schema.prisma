@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Institution {
-  id         Int          @id @default(autoincrement())
-  name       String       @unique
-  region     String
-  country    String?
-  createdAt  DateTime     @default(now())
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  region      String
+  country     String?
+  createdAt   DateTime     @default(now())
   departments Department[]
 }
 
@@ -22,6 +22,17 @@ model Department {
   institutionId Int
   createdAt     DateTime    @default(now())
   institution   Institution @relation(fields: [institutionId], references: [id])
+  Course        Course[]
+}
+
+model Course {
+  id           Int        @id @default(autoincrement())
+  code         String
+  name         String
+  credits      Int
+  departmentId Int
+  createdAt    DateTime   @default(now())
+  department   Department @relation(fields: [departmentId], references: [id])
 }
 
 // model:     Starts definition of new model called "x"
