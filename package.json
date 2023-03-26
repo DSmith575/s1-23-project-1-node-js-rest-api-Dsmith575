@@ -6,6 +6,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
     "nodemon": "nodemon app.js",
     "prisma": "prisma studio"
   },
@@ -22,11 +23,12 @@
   "dependencies": {
     "@prisma/client": "^4.11.0",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "joi": "^17.9.1"
   },
   "devDependencies": {
     "@prisma/studio": "^0.483.0",
-    "nodemon": "^2.0.21",
+    "nodemon": "^2.0.22",
     "prisma": "^4.11.0"
   }
 }

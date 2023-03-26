@@ -9,7 +9,9 @@ datasource db {
 
 model Institution {
   id         Int          @id @default(autoincrement())
-  name       String
+  name       String       @unique
+  region     String
+  country    String?
   createdAt  DateTime     @default(now())
   departments Department[]
 }
@@ -21,3 +23,11 @@ model Department {
   createdAt     DateTime    @default(now())
   institution   Institution @relation(fields: [institutionId], references: [id])
 }
+
+// model:     Starts definition of new model called "x"
+// id:        Int, Marked as primary key "@id"
+// name:      String, defines name
+// instId:    Defines instId
+// insti =>   Defines relationship Institution @relation(fields:[instID], ref: [id])
+// ^^^^       The field:[instID] = the id created in department
+// ^^^^       the ref:[id] refers to the Institution tables id as a connection
