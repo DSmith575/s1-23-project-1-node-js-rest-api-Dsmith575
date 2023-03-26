@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const institutionSchema = Joi.object({
   name: Joi.string().required(),
   region: Joi.string().required(),
-  country: Joi.string().required,
+  country: Joi.string().required(),
 });
 
 const getInstitutions = async (req, res) => {
