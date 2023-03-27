@@ -1,6 +1,10 @@
 import { Router } from "express";
 const router = Router();
 
-// import {
+ import {
+    getCourse
+} from "../controllers/courses.js";
 
-// } from 
+router.route("/").get(getCourse);
+
+export default router;

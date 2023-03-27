@@ -32,7 +32,7 @@ model Course {
   credits      Int
   departmentId Int
   createdAt    DateTime   @default(now())
-  department   Department @relation(fields: [departmentId], references: [id])
+  departments   Department @relation(fields: [departmentId], references: [id])
 }
 
 // model:     Starts definition of new model called "x"

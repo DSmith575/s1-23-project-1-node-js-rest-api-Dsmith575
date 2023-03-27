@@ -126,6 +126,9 @@ const getInstitution = async (req, res) => {
 
     const institution = await prisma.institution.findUnique({
       where: { id: Number(id) },
+      include: {
+        departments: true,
+      }
     });
 
     if (!institution) {
