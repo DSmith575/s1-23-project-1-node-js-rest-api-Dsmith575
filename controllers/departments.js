@@ -2,8 +2,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-
-
 const getDepartment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -25,8 +23,6 @@ const getDepartment = async (req, res) => {
     });
   }
 };
-
-
 
 const getDepartments = async (req, res) => {
   try {
@@ -64,7 +60,6 @@ const createDepartment = async (req, res) => {
     });
   }
 };
-
 
 const updateDepartment = async (req, res) => {
   try {

@@ -8,6 +8,33 @@ const institutionSchema = Joi.object({
   country: Joi.string().required(),
 });
 
+const getInstitution = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const institution = await prisma.institution.findUnique({
+      where: { id: Number(id) },
+      include: {
+        departments: true,
+      },
+    });
+
+    if (!institution) {
+      return res
+        .status(200)
+        .json({ msg: `No institution with the id: ${id} found` });
+    }
+
+    return res.json({
+      data: institution,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      msg: err.message,
+    });
+  }
+};
+
 const getInstitutions = async (req, res) => {
   try {
     const institutions = await prisma.institution.findMany({
@@ -82,7 +109,7 @@ const updateInstitution = async (req, res) => {
     });
 
     return res.json({
-      msg: `Institution with the id: ${id} successfully update`,
+      msg: `Institution with the id: ${id} successfully updated`,
       data: institution,
     });
   } catch (err) {
@@ -109,33 +136,6 @@ const deleteInstitution = async (req, res) => {
     await prisma.institution.delete({
       where: { id: Number(id) },
     });
-
-    return res.json({
-      data: institution,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      msg: err.message,
-    });
-  }
-};
-
-const getInstitution = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const institution = await prisma.institution.findUnique({
-      where: { id: Number(id) },
-      include: {
-        departments: true,
-      }
-    });
-
-    if (!institution) {
-      return res
-        .status(200)
-        .json({ msg: `No institution with the id: ${id} found` });
-    }
 
     return res.json({
       data: institution,

@@ -19,7 +19,7 @@ app.use(json());
 
 app.use(`/${BASE_URL}/${VERSION}/institutions`, institutions);
 app.use(`/${BASE_URL}/${VERSION}/departments`, departments);
-app.use(`/${BASE_URL}/${VERSION}/courses`, courses)
+app.use(`/${BASE_URL}/${VERSION}/courses`, courses);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

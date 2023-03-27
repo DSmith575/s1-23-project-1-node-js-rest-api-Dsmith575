@@ -19,8 +19,8 @@ CREATE TABLE "Department" (
 -- CreateTable
 CREATE TABLE "Course" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "code" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
     "credits" INTEGER NOT NULL,
     "departmentId" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

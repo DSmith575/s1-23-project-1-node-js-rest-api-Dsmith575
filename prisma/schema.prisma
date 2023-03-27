@@ -27,12 +27,12 @@ model Department {
 
 model Course {
   id           Int        @id @default(autoincrement())
-  code         String
   name         String
+  code         String
   credits      Int
   departmentId Int
   createdAt    DateTime   @default(now())
-  departments   Department @relation(fields: [departmentId], references: [id])
+  departments  Department @relation(fields: [departmentId], references: [id])
 }
 
 // model:     Starts definition of new model called "x"
