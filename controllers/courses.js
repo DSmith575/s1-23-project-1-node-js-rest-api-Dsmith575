@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 const courseSchema = Joi.object({
   name: Joi.string().required(),
   code: Joi.string().required(),
-  credits: Joi.number().required,
-  departmentId: Joi.number().required,
+  credits: Joi.number().required(),
+  departmentId: Joi.number().required(),
 });
 
 const getCourse = async (req, res) => {
@@ -63,12 +63,13 @@ const createCourse = async (req, res) => {
       data: { name, code, credits, departmentId },
     });
 
-    const newCourses = await prisma.course.findMany();
+    const newCourses = await prisma.institution.findMany();
 
     return res.status(201).json({
-      msg: "Course successfully created",
+      msg: "Institution successfully created",
       data: newCourses,
     });
+
   } catch (err) {
     return res.status(500).json({
       msg: err.message,
@@ -79,33 +80,29 @@ const createCourse = async (req, res) => {
 const updateCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, code, credits, departmentId } = req.body;
+    const { error, value }= courseSchema.validate(req.body);
 
-    let course = await prisma.course.findUnique({
-      where: { id: Number(id) },
-    });
-
-    if (!course) {
-      return res
-        .status(201)
-        .json({ msg: `No course with the id: ${id} found` });
+    if (error) {
+      return res.status(400).json({
+        msg: error.details[0].message,
+      });
     }
 
-    course = await prisma.course.update({
-      where: { id: Number(id) },
+    const { name, code, credits, departmentId } = value;
+
+    const updatedCourse = await prisma.course.update({
+      where: {id: Number(id)},
       data: { name, code, credits, departmentId },
     });
 
-    return res.json({
-      msg: `Course with the id: ${id} successfully updated`,
-      data: course,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      msg: err.message,
-    });
+    return res.status(201).json({
+      msg: "Course updated successfully",
+      data: updatedCourse,
+    })
   }
-};
+}
+
+
 
 const deleteCourse = async (req, res) => {
   try {

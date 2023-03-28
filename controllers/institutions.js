@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Joi from "joi";
+
 const prisma = new PrismaClient();
 
 const institutionSchema = Joi.object({
@@ -91,27 +92,25 @@ const createInstitution = async (req, res) => {
 const updateInstitution = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, region, country } = req.body;
+    const { error, value } = institutionSchema.validate(req.body);
 
-    let institution = await prisma.institution.findUnique({
-      where: { id: Number(id) },
-    });
-
-    if (!institution) {
-      return res
-        .status(201)
-        .json({ msg: `No institution with the id: ${id} found` });
+    if (error) {
+      return res.status(400).json({
+        msg: error.details[0].message,
+      });
     }
 
-    institution = await prisma.institution.update({
-      where: { id: Number(id) },
+    const { name, region, country } = value;
+
+    const updatedInstitution = await prisma.institution.update({
+      where: {id: Number(id)},
       data: { name, region, country },
     });
 
-    return res.json({
-      msg: `Institution with the id: ${id} successfully updated`,
-      data: institution,
-    });
+    return res.status(201).json({
+      msg: "Institution updated successfully",
+      data: updatedInstitution,
+    })
   } catch (err) {
     return res.status(500).json({
       msg: err.message,

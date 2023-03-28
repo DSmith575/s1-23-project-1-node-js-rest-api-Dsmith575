@@ -1,6 +1,12 @@
 import { PrismaClient } from "@prisma/client";
+import Joi from 'joi';
 
 const prisma = new PrismaClient();
+
+const departmentSchema = Joi.object({
+  name: Joi.string().required(),
+  institutionId: Joi.number().required(),
+});
 
 const getDepartment = async (req, res) => {
   try {
@@ -8,6 +14,9 @@ const getDepartment = async (req, res) => {
 
     const department = await prisma.department.findUnique({
       where: { id: Number(id) },
+      include: {
+        Course: true,
+      }
     });
 
     if (!department) {
@@ -26,7 +35,11 @@ const getDepartment = async (req, res) => {
 
 const getDepartments = async (req, res) => {
   try {
-    const departments = await prisma.department.findMany();
+    const departments = await prisma.department.findMany({
+      include: {
+        Course: true,
+      }
+    });
 
     if (departments.length === 0) {
       return res.status(200).json({ msg: "No departments found" });
@@ -42,55 +55,67 @@ const getDepartments = async (req, res) => {
 
 const createDepartment = async (req, res) => {
   try {
-    const { name, institutionId } = req.body;
+    const { error, value } = departmentSchema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({
+        msg: error.details[0].message,
+      });
+    }
+
+    const { name, institutionId } = value;
 
     await prisma.department.create({
       data: { name, institutionId },
     });
 
-    const newDepartments = await prisma.department.findMany();
+    const newDepartments = await prisma.department.findMany(({
+
+    }))
 
     return res.status(201).json({
       msg: "Department successfully created",
       data: newDepartments,
     });
+
+
   } catch (err) {
     return res.status(500).json({
       msg: err.message,
-    });
+    })
   }
 };
 
 const updateDepartment = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
-
-    let departments = await prisma.departments.findUnique({
-      where: { id: Number(id) },
-    });
-
-    if (!departments) {
-      return res
-        .status(201)
-        .json({ msg: `No Departments with the id: ${id} found` });
+    const { error, value } = departmentSchema.validate(req.body);
+    
+    if (error) {
+      return res.status(400).json({
+        msg: error.details[0].message,
+      });
     }
 
-    departments = await prisma.Departments.update({
-      where: { id: Number(id) },
-      data: { name },
+    const { name, institutionId } = value;
+    
+    const updatedDepartment = await prisma.department.update({
+      where: {id: Number(id)},
+      data: { name, institutionId },
     });
 
-    return res.json({
-      msg: `Departments with the id: ${id} successfully update`,
-      data: Departments,
-    });
+    return res.status(201).json({
+      msg: "Department updated successfully",
+      data: updatedDepartment,
+    })
   } catch (err) {
     return res.status(500).json({
       msg: err.message,
     });
   }
 };
+
+
 
 const deleteDepartment = async (req, res) => {
   try {
