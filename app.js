@@ -6,7 +6,7 @@ import institutions from "./routes/institutions.js";
 import departments from "./routes/departments.js";
 import courses from "./routes/courses.js";
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 
