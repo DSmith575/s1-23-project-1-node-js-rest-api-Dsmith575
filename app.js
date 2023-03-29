@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express, { urlencoded, json } from "express";
+import rateLimit from "express-rate-limit";
 
 import institutions from "./routes/institutions.js";
 import departments from "./routes/departments.js";
@@ -9,13 +10,20 @@ dotenv.config();
 
 const app = express();
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // limit each IP to x requests per windowMs
+});
+
 const BASE_URL = "api";
-const VERSION = "v1";
+const VERSION = "";
 
 const PORT = process.env.PORT;
 
 app.use(urlencoded({ extended: false }));
 app.use(json());
+app.use(limiter);
+
 
 app.use(`/${BASE_URL}/${VERSION}/institutions`, institutions);
 app.use(`/${BASE_URL}/${VERSION}/departments`, departments);

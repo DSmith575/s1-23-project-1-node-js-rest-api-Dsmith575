@@ -3,6 +3,11 @@ import Joi from "joi";
 
 const prisma = new PrismaClient();
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const institutionSchema = Joi.object({
   name: Joi.string().required(),
   region: Joi.string().required(),
@@ -38,17 +43,49 @@ const getInstitution = async (req, res) => {
 
 const getInstitutions = async (req, res) => {
   try {
-    const institutions = await prisma.institution.findMany({
+    const sortBy = req.query.sortBy || "name";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
       include: {
         departments: true,
       },
-    });
+    };
+
+    if (req.query.name || req.query.region || req.query.country) {
+      query.where = {
+        name: {
+          in: req.query.name || undefined,
+        },
+        region: {
+          in: req.query.region || undefined,
+        },
+        country: {
+          in: req.query.country || undefined,
+        },
+      };
+    }
+
+    const institutions = await prisma.institution.findMany(query);
 
     if (institutions.length === 0) {
       return res.status(200).json({ msg: "No institutions found" });
     }
 
-    return res.json({ data: institutions });
+    const hasNextPage = institutions.length === Number(amount);
+
+    return res.json({
+      data: institutions,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
+    });
   } catch (err) {
     return res.status(500).json({
       msg: err.message,
