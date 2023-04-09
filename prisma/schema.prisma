@@ -7,25 +7,61 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-
 model Character {
-  id Int @id @default(autoincrement())
-  name String @unique
-  attributes Attributes?
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  rarity      Rarity?
+  element     Element[]
+  attributes  Attributes?
+  personality Personality[]
+  description String
+}
+
+model Personality {
+  id              Int       @id @default(autoincrement()) @ignore
+  personalityName String
+  character       Character @relation(fields: [characterId], references: [id])
+  characterId     Int       @unique @ignore
+}
+
+model Element {
+  id          Int       @id @default(autoincrement()) @ignore
+  elementName String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int       @unique @ignore
 }
 
 model Attributes {
-id Int @id @default(autoincrement()) @ignore
-hp Int
-mp Int
-pwr Int
-spd Int
-end Int
-spr Int
-lck Int
-character Character @relation(fields: [characterId], references: [id])
-characterId Int @unique @ignore
+  id          Int       @id @default(autoincrement()) @ignore
+  hp          Int
+  mp          Int
+  pwr         Int
+  spd         Int
+  end         Int
+  spr         Int
+  lck         Int
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int       @unique @ignore
 }
 
+model Rarity {
+  id          Int       @id @default(autoincrement()) @ignore
+  rarity      Int
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int       @unique @ignore
+}
 
+// const validWeaponValues = ["Staff", "Sword", "Katana", "Axe", "Spear", "Bow", "Fist", "Hammer"];
+// const validElementValues = ["None", "Fire", "Earth", "Wind", "Water", "Thunder", "Shade", "Crystal"]
+// const validAccessoryType = ["Bangle", "Necklace", "Ring"]
+// const validAffinity = ["Shadow", "Light"]
+// const validRarities = [2, 3, 4, 5]
+// Validate weapon value before creating a new Character
+// if (!validWeaponValues.includes(newCharacter.weapon)) {
+//   throw new Error(`Invalid weapon value: ${newCharacter.weapon}`);
+// }
 
+// // Update weapon value for an existing Character
+// if (!validWeaponValues.includes(updatedCharacter.weapon)) {
+//   throw new Error(`Invalid weapon value: ${updatedCharacter.weapon}`);
+// }
