@@ -4,6 +4,7 @@ import express, { urlencoded, json } from "express";
 //  loadEnv
 
 import characters from "./routes/characters.js";
+import attributes from "./routes/attributes.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(urlencoded({ extended: false }));
 app.use(json());
 
 app.use(`/${BASE_URL}/${VERSION}/characters`, characters);
+app.use(`/${BASE_URL}/${VERSION}/attributes`, attributes);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

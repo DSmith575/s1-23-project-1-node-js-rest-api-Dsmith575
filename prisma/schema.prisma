@@ -15,21 +15,21 @@ model Character {
   // element     Element[]
 
   // personality Personality[]
-    // attributes  Attributes?
+    attributes  Attribute?
 }
 
-// model Attributes {
-//   id          Int       @id @default(autoincrement())
-//   hp          Int
-//   mp          Int
-//   pwr         Int
-//   spd         Int
-//   end         Int
-//   spr         Int
-//   lck         Int
-//   character   Character @relation(fields: [characterId], references: [id])
-//   characterId Int       @unique
-// }
+model Attribute {
+  id          Int       @id @default(autoincrement())
+  hp          Int
+  mp          Int
+  pwr         Int
+  spd         Int
+  end         Int
+  spr         Int
+  lck         Int
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int       @unique
+}
 
 
 // model Personality {

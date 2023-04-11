@@ -15,9 +15,25 @@ const getCharacter = async (req, res) => {
         const character = await prisma.character.findUnique({
             where: { id: Number(id) },
             // include: {
-            //     rarity: true,
+            //     attributes: true,
             // },
-        });
+            select: {
+                id: true,
+                name: true,
+                rarity: true,
+                attributes: { // Include the related Attributes model
+                  select: {
+                    hp: true,
+                    mp: true,
+                    pwr: true,
+                    spd: true,
+                    end: true,
+                    spr: true,
+                    lck: true
+                  }
+                }
+              }
+            });
 
         if (!character) {
             return res
@@ -38,10 +54,23 @@ const getCharacter = async (req, res) => {
 const getCharacters = async (req, res) => {
     try {
         const characters = await prisma.character.findMany({
-            // include: {
-            //     rarity: true,
-            // },
-        });
+            select: {
+                id: true,
+                name: true,
+                rarity: true,
+                attributes: { // Include the related Attributes model
+                  select: {
+                    hp: true,
+                    mp: true,
+                    pwr: true,
+                    spd: true,
+                    end: true,
+                    spr: true,
+                    lck: true
+                  }
+                }
+              }
+            });
 
         if (characters.length === 0) {
             return res.status(200).json({ msg: "No characters found"});
