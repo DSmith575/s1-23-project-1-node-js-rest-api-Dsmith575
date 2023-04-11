@@ -14,9 +14,9 @@ const getCharacter = async (req, res) => {
 
         const character = await prisma.character.findUnique({
             where: { id: Number(id) },
-            include: {
-                rarity: true,
-            },
+            // include: {
+            //     rarity: true,
+            // },
         });
 
         if (!character) {
@@ -37,10 +37,10 @@ const getCharacter = async (req, res) => {
 
 const getCharacters = async (req, res) => {
     try {
-        const characters = await prisma.characters.findMany({
-            include: {
-                rarity: true,
-            },
+        const characters = await prisma.character.findMany({
+            // include: {
+            //     rarity: true,
+            // },
         });
 
         if (characters.length === 0) {
@@ -74,9 +74,9 @@ const createCharacter = async (req, res) => {
         });
 
         const newCharacters = await prisma.character.findMany({
-            include: {
-                rarity: true,
-            },
+            // include: {
+            //     rarity: true,
+            // },
         });
 
         return res.status(201).json({
