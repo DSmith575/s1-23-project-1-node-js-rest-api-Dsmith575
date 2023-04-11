@@ -10,29 +10,17 @@ datasource db {
 model Character {
   id          Int           @id @default(autoincrement())
   name        String        @unique
-  rarity      Rarity?
-  element     Element[]
-  attributes  Attributes?
-  personality Personality[]
+  rarity      Int
+  // rarity      Rarity?
+  // element     Element[]
+
+  // personality Personality[]
+    attributes  Attributes?
   description String
 }
 
-model Personality {
-  id              Int       @id @default(autoincrement()) @ignore
-  personalityName String
-  character       Character @relation(fields: [characterId], references: [id])
-  characterId     Int       @unique @ignore
-}
-
-model Element {
-  id          Int       @id @default(autoincrement()) @ignore
-  elementName String
-  character   Character @relation(fields: [characterId], references: [id])
-  characterId Int       @unique @ignore
-}
-
 model Attributes {
-  id          Int       @id @default(autoincrement()) @ignore
+  id          Int       @id @default(autoincrement())
   hp          Int
   mp          Int
   pwr         Int
@@ -41,15 +29,32 @@ model Attributes {
   spr         Int
   lck         Int
   character   Character @relation(fields: [characterId], references: [id])
-  characterId Int       @unique @ignore
+  characterId Int       @unique
 }
 
-model Rarity {
-  id          Int       @id @default(autoincrement()) @ignore
-  rarity      Int
-  character   Character @relation(fields: [characterId], references: [id])
-  characterId Int       @unique @ignore
-}
+
+// model Personality {
+//   id              Int       @id @default(autoincrement()) @ignore
+//   personalityName String
+//   character       Character @relation(fields: [characterId], references: [id])
+//   characterId     Int       @unique @ignore
+// }
+
+// model Element {
+//   id          Int       @id @default(autoincrement()) @ignore
+//   elementName String
+//   character   Character @relation(fields: [characterId], references: [id])
+//   characterId Int       @unique @ignore
+// }
+
+
+
+// model Rarity {
+//   id          Int       @id @default(autoincrement()) @ignore
+//   rarity      Int
+//   character   Character @relation(fields: [characterId], references: [id])
+//   characterId Int       @unique @ignore
+// }
 
 // const validWeaponValues = ["Staff", "Sword", "Katana", "Axe", "Spear", "Bow", "Fist", "Hammer"];
 // const validElementValues = ["None", "Fire", "Earth", "Wind", "Water", "Thunder", "Shade", "Crystal"]
