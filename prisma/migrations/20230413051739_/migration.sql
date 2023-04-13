@@ -2,7 +2,7 @@
 CREATE TABLE "Character" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
-    "rarity" INTEGER NOT NULL
+    "description" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -19,8 +19,14 @@ CREATE TABLE "Attribute" (
     CONSTRAINT "Attribute_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
--- CreateIndex
-CREATE UNIQUE INDEX "Character_name_key" ON "Character"("name");
+-- CreateTable
+CREATE TABLE "Rarity" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "rarity" INTEGER NOT NULL,
+    "className" TEXT NOT NULL,
+    "characterId" INTEGER NOT NULL,
+    CONSTRAINT "Rarity_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Attribute_characterId_key" ON "Attribute"("characterId");

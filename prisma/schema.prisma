@@ -8,14 +8,16 @@ datasource db {
 }
 
 model Character {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  rarity      Int
-  // rarity      Rarity?
+  id          Int        @id @default(autoincrement())
+  name        String     
+  rarity      Rarity[]   
+  description String
+  // affinity      String
+  // weaponType    WeaponType?
+  // accessoryType AccessoryType?
   // element     Element[]
-
-  // personality Personality[]
-    attributes  Attribute?
+  // personality   Personalities[]
+  attributes  Attribute?
 }
 
 model Attribute {
@@ -31,6 +33,36 @@ model Attribute {
   characterId Int       @unique
 }
 
+model Rarity {
+  id          Int       @id @default(autoincrement())
+  rarity      Int
+  className   String    
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int
+}
+
+
+// model WeaponType {
+//   id          Int       @id @default(autoincrement())
+//   weapon      String
+//   type        String
+//   character   Character @relation(fields: [characterId], references: [id])
+//   characterId Int @unique
+// }
+
+// model AccessoryType {
+//   id          Int       @id @default(autoincrement())
+//   accessory   String
+//   character   Character @relation(fields: [characterId], references: [id])
+//   characterId Int @unique
+// }
+
+// model Personalities {
+//   id          Int       @id @default(autoincrement())
+//   personality String
+//   character   Character @relation(fields: [characterId], references: [id])
+//   characterId Int
+// }
 
 // model Personality {
 //   id              Int       @id @default(autoincrement()) @ignore
@@ -45,8 +77,6 @@ model Attribute {
 //   character   Character @relation(fields: [characterId], references: [id])
 //   characterId Int       @unique @ignore
 // }
-
-
 
 // model Rarity {
 //   id          Int       @id @default(autoincrement()) @ignore

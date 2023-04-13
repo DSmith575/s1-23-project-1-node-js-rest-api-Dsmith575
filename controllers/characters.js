@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const characterSchema = Joi.object({
     name: Joi.string().required(),
-    rarity: Joi.number().required()
+    description: Joi.string().required()
 });
 
 
@@ -20,6 +20,7 @@ const getCharacter = async (req, res) => {
             select: {
                 id: true,
                 name: true,
+                description: true,
                 rarity: true,
                 attributes: { // Include the related Attributes model
                   select: {
@@ -57,6 +58,7 @@ const getCharacters = async (req, res) => {
             select: {
                 id: true,
                 name: true,
+                description: true,
                 rarity: true,
                 attributes: { // Include the related Attributes model
                   select: {
@@ -96,10 +98,10 @@ const createCharacter = async (req, res) => {
             });
         }
 
-        const  {name, rarity } = value;
+        const  {name, description } = value;
 
         await prisma.character.create({
-            data: {name, rarity },
+            data: {name, description },
         });
 
         const newCharacters = await prisma.character.findMany({
@@ -130,11 +132,11 @@ const updateCharacter = async (req, res) => {
             });
         }
 
-        const { name, rarity } = value;
+        const { name, description } = value;
 
         const updatedCharacter = await prisma.character.update({
             where: { id: Number(id) },
-            data: { name, rarity },
+            data: { name, description },
         });
 
         return res.status(200).json({
