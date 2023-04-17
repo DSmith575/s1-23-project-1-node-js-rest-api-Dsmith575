@@ -59,14 +59,12 @@ const createRarity = async (req, res) => {
 
     const { rarity, className, characterId } = value;
 
-
     // Validate rarity field
     if (!validRarities.includes(rarity)) {
       return res.status(400).json({
         msg: `Invalid rarity. Allowed values are ${validRarities[0]}, ${validRarities[1]}, ${validRarities[2]}, ${validRarities[3]}`,
       });
     }
-
 
     await prisma.rarity.create({
       data: { rarity, className, characterId },
@@ -98,12 +96,12 @@ const updateRarity = async (req, res) => {
 
     const { rarity, className, characterId } = values;
 
-        // Validate rarity field
-        if (!validRarities.includes(rarity)) {
-            return res.status(400).json({
-              msg: `Invalid rarity. Allowed values are ${validRarities[0]}, ${validRarities[1]}, ${validRarities[2]}, ${validRarities[3]}`,
-            });
-          }
+    // Validate rarity field
+    if (!validRarities.includes(rarity)) {
+      return res.status(400).json({
+        msg: `Invalid rarity. Allowed values are ${validRarities[0]}, ${validRarities[1]}, ${validRarities[2]}, ${validRarities[3]}`,
+      });
+    }
 
     const updatedRarity = await prisma.rarity.update({
       where: { id: Number(id) },

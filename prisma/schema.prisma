@@ -8,16 +8,18 @@ datasource db {
 }
 
 model Character {
-  id          Int        @id @default(autoincrement())
-  name        String     
-  rarity      Rarity[]   
-  description String
-  // affinity      String
+  id            Int            @id @default(autoincrement())
+  name          String
+  rarity        Rarity[]
+  //element Element[]
+  affinity      String
+  affinityBonus Affinity_bonus?
   // weaponType    WeaponType?
   // accessoryType AccessoryType?
   // element     Element[]
   // personality   Personalities[]
-  attributes  Attribute?
+  attributes    Attribute?
+  description   String
 }
 
 model Attribute {
@@ -36,19 +38,48 @@ model Attribute {
 model Rarity {
   id          Int       @id @default(autoincrement())
   rarity      Int
-  className   String    
+  className   String
   character   Character @relation(fields: [characterId], references: [id])
   characterId Int
 }
 
+model Affinity_bonus {
+  id          Int       @id @default(autoincrement())
+  bonus5      String
+  bonus15     String
+  bonus30     String
+  bonus50     String
+  bonus75     String
+  bonus80     String
+  bonus105    String
+  bonus120    String
+  bonus140    String
+  bonus175    String
+  bonus200    String
+  bonus215    String
+  bonus225    String
+  bonus255    String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int       @unique
+}
 
 // model WeaponType {
 //   id          Int       @id @default(autoincrement())
 //   weapon      String
-//   type        String
+//   skillType        String
 //   character   Character @relation(fields: [characterId], references: [id])
 //   characterId Int @unique
 // }
+
+// const validWeaponValues = ["Staff", "Sword", "Katana", "Axe", "Spear", "Bow", "Fist", "Hammer"];
+// model Weapons {
+// id
+// name
+// skillType
+// weaponType WeaponType @relation
+// weaponId
+// 
+//}
 
 // model AccessoryType {
 //   id          Int       @id @default(autoincrement())
@@ -56,6 +87,8 @@ model Rarity {
 //   character   Character @relation(fields: [characterId], references: [id])
 //   characterId Int @unique
 // }
+
+// const validAccessoryType = ["Bangle", "Necklace", "Ring"]
 
 // model Personalities {
 //   id          Int       @id @default(autoincrement())
@@ -85,9 +118,9 @@ model Rarity {
 //   characterId Int       @unique @ignore
 // }
 
-// const validWeaponValues = ["Staff", "Sword", "Katana", "Axe", "Spear", "Bow", "Fist", "Hammer"];
+
 // const validElementValues = ["None", "Fire", "Earth", "Wind", "Water", "Thunder", "Shade", "Crystal"]
-// const validAccessoryType = ["Bangle", "Necklace", "Ring"]
+
 // const validAffinity = ["Shadow", "Light"]
 // const validRarities = [2, 3, 4, 5]
 // Validate weapon value before creating a new Character
