@@ -50,11 +50,11 @@ const getAffinity = async (req, res) => {
 const getAffinities = async (req, res) => {
   try {
     const affinities = await prisma.affinity_bonus.findMany({
-      // character: {
-      //   select: {
-      //     name: true,
-      //   },
-      // },
+      character: {
+        select: {
+          name: true,
+        },
+      },
     });
 
     if (affinities.length === 0) {

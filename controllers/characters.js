@@ -1,3 +1,17 @@
+/**
+ * API Controller for managing character data.
+ *
+ * This controller handles CRUD operations related to character creation 
+ *
+ * @file: characters.js
+ * @version: 1.0.0
+ * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
+ * @created: 2023-04-17
+ * @updated: 2023-04-17
+ * 
+ * @SCHEMA
+ */
+
 import { PrismaClient } from "@prisma/client";
 import Joi from "joi";
 const prisma = new PrismaClient();
@@ -5,7 +19,7 @@ const prisma = new PrismaClient();
 const characterSchema = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
-  affinity: Joi.string().required()
+  affinity: Joi.string().required(),
 });
 
 const validAffinities = ["Light", "Shadow"];
@@ -27,27 +41,27 @@ const getCharacter = async (req, res) => {
           select: {
             rarity: true,
             className: true,
-          }
+          },
         },
         affinity: true,
         affinityBonus: {
           select: {
-          bonus5: true,
-          bonus15: true,
-          bonus30: true,
-          bonus50: true,
-          bonus75: true,
-          bonus80: true,
-          bonus105: true,
-          bonus120: true,
-          bonus140: true,
-          bonus175: true,
-          bonus200: true,
-          bonus215: true,
-          bonus225: true,
-          bonus255: true,
-        }
-      },
+            bonus5: true,
+            bonus15: true,
+            bonus30: true,
+            bonus50: true,
+            bonus75: true,
+            bonus80: true,
+            bonus105: true,
+            bonus120: true,
+            bonus140: true,
+            bonus175: true,
+            bonus200: true,
+            bonus215: true,
+            bonus225: true,
+            bonus255: true,
+          },
+        },
         attributes: {
           // Include the related Attributes model
           select: {
@@ -90,27 +104,27 @@ const getCharacters = async (req, res) => {
           select: {
             rarity: true,
             className: true,
-          }
+          },
         },
         affinity: true,
         affinityBonus: {
           select: {
-          bonus5: true,
-          bonus15: true,
-          bonus30: true,
-          bonus50: true,
-          bonus75: true,
-          bonus80: true,
-          bonus105: true,
-          bonus120: true,
-          bonus140: true,
-          bonus175: true,
-          bonus200: true,
-          bonus215: true,
-          bonus225: true,
-          bonus255: true,
-        }
-      },
+            bonus5: true,
+            bonus15: true,
+            bonus30: true,
+            bonus50: true,
+            bonus75: true,
+            bonus80: true,
+            bonus105: true,
+            bonus120: true,
+            bonus140: true,
+            bonus175: true,
+            bonus200: true,
+            bonus215: true,
+            bonus225: true,
+            bonus255: true,
+          },
+        },
         attributes: {
           // Include the related Attributes model
           select: {
@@ -157,15 +171,27 @@ const createCharacter = async (req, res) => {
       });
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //Check if a character already exists with the name trying to create
+    const existingCharacter = await prisma.character.findFirst({
+      where: {
+        name: {
+          contains: name.toLowerCase(), // Perform case-insensitive search
+        },
+      },
+    });
+
+    if (existingCharacter) {
+      return res.status(409).json({
+        msg: `Character with the name ${name} already exists in the database`,
+      });
+    }
+
     await prisma.character.create({
       data: { name, description, affinity },
     });
 
-    const newCharacters = await prisma.character.findMany({
-      // include: {
-      //     rarity: true,
-      // },
-    });
+    const newCharacters = await prisma.character.findMany({});
 
     return res.status(201).json({
       msg: "Character successfully created",

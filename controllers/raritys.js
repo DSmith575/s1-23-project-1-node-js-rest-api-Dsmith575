@@ -94,7 +94,7 @@ const updateRarity = async (req, res) => {
       });
     }
 
-    const { rarity, className, characterId } = values;
+    const { rarity, className, characterId } = value;
 
     // Validate rarity field
     if (!validRarities.includes(rarity)) {

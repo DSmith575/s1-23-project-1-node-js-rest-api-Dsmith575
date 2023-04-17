@@ -2,11 +2,11 @@ import { Router } from "express";
 const router = Router();
 
 import {
-    getRarity,
-    getRarities,
-    createRarity,
-    updateRarity,
-    deleteRarity
+  getRarity,
+  getRarities,
+  createRarity,
+  updateRarity,
+  deleteRarity,
 } from "../controllers/raritys.js";
 
 router.route("/").get(getRarities).post(createRarity);

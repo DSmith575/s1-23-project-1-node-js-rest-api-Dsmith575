@@ -12,7 +12,6 @@ dotenv.config();
 
 const app = express();
 
-
 const BASE_URL = "api";
 const VERSION = "v1";
 
@@ -26,13 +25,12 @@ app.use(`/${BASE_URL}/${VERSION}/attributes`, attributes);
 app.use(`/${BASE_URL}/${VERSION}/raritys`, raritys);
 app.use(`/${BASE_URL}/${VERSION}/affinities`, affinities);
 
-
 // app.get(`/`, async (req, res) => {
 //     try {
 //       // Fetch the available routes from your Prisma models
 //       const characters = await prisma.characters.findMany();
 //       const attributes = await prisma.attributes.findMany();
-  
+
 //       // Format the list of available routes as a response
 //       const response = {
 //         message: 'Available routes:',
@@ -42,7 +40,7 @@ app.use(`/${BASE_URL}/${VERSION}/affinities`, affinities);
 //           // ... add more routes here ...
 //         ],
 //       };
-  
+
 //       // Send the formatted list of available routes as the response
 //       res.json(response);
 //     } catch (error) {
@@ -51,10 +49,9 @@ app.use(`/${BASE_URL}/${VERSION}/affinities`, affinities);
 //       res.status(500).json({ error: 'Internal Server Error' });
 //     }
 //   });
-  
 
 app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
 
 export default app;

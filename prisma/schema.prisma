@@ -8,18 +8,18 @@ datasource db {
 }
 
 model Character {
-  id            Int            @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   name          String
   rarity        Rarity[]
   //element Element[]
-  affinity      String
-  affinityBonus Affinity_bonus?
   // weaponType    WeaponType?
-  // accessoryType AccessoryType?
-  // element     Element[]
+  affinity      String
   // personality   Personalities[]
-  attributes    Attribute?
   description   String
+  affinityBonus Affinity_bonus?
+
+  // accessoryType AccessoryType?
+  attributes Attribute?
 }
 
 model Attribute {
@@ -66,7 +66,14 @@ model Affinity_bonus {
 // model WeaponType {
 //   id          Int       @id @default(autoincrement())
 //   weapon      String
-//   skillType        String
+//   skillType   String
+//   character   Character @relation(references: [id], fields: [characterId])
+//   characterId Int
+// }
+
+// model AccessoryType {
+//   id          Int       @id @default(autoincrement())
+//   accessory   String
 //   character   Character @relation(fields: [characterId], references: [id])
 //   characterId Int @unique
 // }
@@ -80,13 +87,6 @@ model Affinity_bonus {
 // weaponId
 // 
 //}
-
-// model AccessoryType {
-//   id          Int       @id @default(autoincrement())
-//   accessory   String
-//   character   Character @relation(fields: [characterId], references: [id])
-//   characterId Int @unique
-// }
 
 // const validAccessoryType = ["Bangle", "Necklace", "Ring"]
 
@@ -118,11 +118,9 @@ model Affinity_bonus {
 //   characterId Int       @unique @ignore
 // }
 
-
 // const validElementValues = ["None", "Fire", "Earth", "Wind", "Water", "Thunder", "Shade", "Crystal"]
 
-// const validAffinity = ["Shadow", "Light"]
-// const validRarities = [2, 3, 4, 5]
+
 // Validate weapon value before creating a new Character
 // if (!validWeaponValues.includes(newCharacter.weapon)) {
 //   throw new Error(`Invalid weapon value: ${newCharacter.weapon}`);
@@ -132,3 +130,17 @@ model Affinity_bonus {
 // if (!validWeaponValues.includes(updatedCharacter.weapon)) {
 //   throw new Error(`Invalid weapon value: ${updatedCharacter.weapon}`);
 // }
+
+
+
+   // Check if rarity already exists in the model
+
+    // const existingRarity = await prisma.rarity.findUnique({
+    //   where: { rarity: rarity, className: className, characterId: characterId },
+    // });
+
+    // if (existingRarity) {
+    //   return res.status(409).json({
+    //     msg: `Rarity with the value ${rarity} already exists for the character with id ${characterId}`,
+    //   });
+    // }

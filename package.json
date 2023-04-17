@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon app.js",
     "prisma": "prisma studio",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
     "prisma": "^4.12.0"
   },
   "config": {
