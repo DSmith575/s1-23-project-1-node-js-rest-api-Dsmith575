@@ -64,7 +64,7 @@ const createRarity = async (req, res) => {
     // Validate rarity field
     if (!validRarities.includes(rarity)) {
       return res.status(400).json({
-        msg: `Invalid rarity. Allowed values are ${validRarities[0]}, ${validRarities[1]}, ${validRarities[2]}, ${validRarities[3]}`,
+        msg: `Invalid rarity. Allowed values are ${validRarities.join(", ")}`,
       });
     }
 

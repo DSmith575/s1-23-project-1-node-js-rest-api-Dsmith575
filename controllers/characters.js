@@ -177,7 +177,9 @@ const createCharacter = async (req, res) => {
 
     if (!validAffinities.includes(affinity)) {
       return res.status(400).json({
-        msg: `Invalid affinity. Allowed values are ${validAffinities[0]}, ${validAffinities[1]}`,
+        msg: `Invalid affinity. Allowed values are ${validAffinities.join(
+          ", "
+        )}`,
       });
     }
 

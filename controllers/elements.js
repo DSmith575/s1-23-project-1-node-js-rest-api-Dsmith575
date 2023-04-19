@@ -96,7 +96,7 @@ const createElement = async (req, res) => {
 
     if (!validElements.includes(element)) {
       return res.status(400).json({
-        msg: `Invalid element, allowed values are ${validElements.join(", ")}`,
+        msg: `Invalid element, accepted values are ${validElements.join(", ")}`,
       });
     }
 
