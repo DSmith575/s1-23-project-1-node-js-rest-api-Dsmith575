@@ -7,6 +7,14 @@ CREATE TABLE "Character" (
 );
 
 -- CreateTable
+CREATE TABLE "Element" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "element" TEXT NOT NULL,
+    "characterId" INTEGER NOT NULL,
+    CONSTRAINT "Element_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "Attribute" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "hp" INTEGER NOT NULL,

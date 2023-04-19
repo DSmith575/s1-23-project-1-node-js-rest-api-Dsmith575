@@ -11,7 +11,7 @@ model Character {
   id            Int             @id @default(autoincrement())
   name          String
   rarity        Rarity[]
-  //element Element[]
+  element       Element[]
   // weaponType    WeaponType?
   affinity      String
   // personality   Personalities[]
@@ -20,6 +20,13 @@ model Character {
 
   // accessoryType AccessoryType?
   attributes Attribute?
+}
+
+model Element {
+  id          Int       @id @default(autoincrement())
+  element     String
+  character   Character @relation(fields: [characterId], references: [id])
+  characterId Int
 }
 
 model Attribute {
@@ -120,7 +127,6 @@ model Affinity_bonus {
 
 // const validElementValues = ["None", "Fire", "Earth", "Wind", "Water", "Thunder", "Shade", "Crystal"]
 
-
 // Validate weapon value before creating a new Character
 // if (!validWeaponValues.includes(newCharacter.weapon)) {
 //   throw new Error(`Invalid weapon value: ${newCharacter.weapon}`);
@@ -131,16 +137,14 @@ model Affinity_bonus {
 //   throw new Error(`Invalid weapon value: ${updatedCharacter.weapon}`);
 // }
 
+// Check if rarity already exists in the model
 
+// const existingRarity = await prisma.rarity.findUnique({
+//   where: { rarity: rarity, className: className, characterId: characterId },
+// });
 
-   // Check if rarity already exists in the model
-
-    // const existingRarity = await prisma.rarity.findUnique({
-    //   where: { rarity: rarity, className: className, characterId: characterId },
-    // });
-
-    // if (existingRarity) {
-    //   return res.status(409).json({
-    //     msg: `Rarity with the value ${rarity} already exists for the character with id ${characterId}`,
-    //   });
-    // }
+// if (existingRarity) {
+//   return res.status(409).json({
+//     msg: `Rarity with the value ${rarity} already exists for the character with id ${characterId}`,
+//   });
+// }

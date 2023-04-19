@@ -9,7 +9,8 @@
     "nodemon": "nodemon app.js",
     "prisma": "prisma studio",
     "commit": "git-cz",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "migrate": "prisma migrate reset --force && prisma migrate dev"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
-    "prisma": "^4.12.0"
+    "prisma": "^4.13.0"
   },
   "config": {
     "commitizen": {

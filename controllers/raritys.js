@@ -14,7 +14,9 @@ const getRarity = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const rarity = await prisma.rarity.findUnique({});
+    const rarity = await prisma.rarity.findUnique({
+      where: { id: Number(id) },
+    });
 
     if (!rarity) {
       return res.status(200).json({ msg: `No rarity with the id ${id} found` });

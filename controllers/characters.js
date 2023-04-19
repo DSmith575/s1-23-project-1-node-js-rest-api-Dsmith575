@@ -74,6 +74,11 @@ const getCharacter = async (req, res) => {
             lck: true,
           },
         },
+        element: {
+          select: {
+            element: true,
+          },
+        },
       },
     });
 
@@ -135,6 +140,11 @@ const getCharacters = async (req, res) => {
             end: true,
             spr: true,
             lck: true,
+          },
+        },
+        element: {
+          select: {
+            element: true,
           },
         },
       },
