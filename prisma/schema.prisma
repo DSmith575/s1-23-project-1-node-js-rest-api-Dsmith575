@@ -105,27 +105,14 @@ model Affinity_bonus {
 // }
 
 // model Personality {
-//   id              Int       @id @default(autoincrement()) @ignore
-//   personalityName String
+//   id              Int       @id @default(autoincrement())
+//   personality String
 //   character       Character @relation(fields: [characterId], references: [id])
-//   characterId     Int       @unique @ignore
+//   characterId     Int
 // }
 
-// model Element {
-//   id          Int       @id @default(autoincrement()) @ignore
-//   elementName String
-//   character   Character @relation(fields: [characterId], references: [id])
-//   characterId Int       @unique @ignore
-// }
 
-// model Rarity {
-//   id          Int       @id @default(autoincrement()) @ignore
-//   rarity      Int
-//   character   Character @relation(fields: [characterId], references: [id])
-//   characterId Int       @unique @ignore
-// }
 
-// const validElementValues = ["None", "Fire", "Earth", "Wind", "Water", "Thunder", "Shade", "Crystal"]
 
 // Validate weapon value before creating a new Character
 // if (!validWeaponValues.includes(newCharacter.weapon)) {
