@@ -181,7 +181,7 @@ const createPersonality = async (req, res) => {
       });
     }
 
-    await prisma.personality.creater({
+    await prisma.personality.create({
       data: { element, characterId },
     });
 
