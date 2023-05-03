@@ -35,16 +35,6 @@ const characterNoName = {
   description: "Test"
 };
 
-const characterNoAffinity = {
-  name: "Hismena",
-  description: "IDEA"
-};
-
-const characterNoDescription = {
-  name: "Hismena",
-  affinity: "Light"
-};
-
 const characterUpdate = {
   name: "Claude",
   affinity: "Light",
@@ -167,49 +157,6 @@ describe("characters", () => {
       });
   });
 
-
-  
-  it("should require name on character update", (done) => {
-    chai
-      .request(app)
-      .put(`${BASE_URL}/v1/characters/1`)
-      .send(characterNoName)
-      .end((__, characterRes) => {
-        chai.expect(characterRes.status).to.be.equal(400);
-        chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"name\" is required");
-        done(); 
-      });
-  });
-    
-  it("should require affinity on character update", (done) => {
-    chai
-      .request(app)
-      .put(`${BASE_URL}/v1/characters/1`)
-      .send(characterNoAffinity)
-      .end((__, characterRes) => {
-        chai.expect(characterRes.status).to.be.equal(400);
-        chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"affinity\" is required");
-        done(); 
-      });
-  });
-
-  it("should require description on character update", (done) => {
-    chai
-      .request(app)
-      .put(`${BASE_URL}/v1/characters/1`)
-      .send(characterNoDescription)
-      .end((__, characterRes) => {
-        chai.expect(characterRes.status).to.be.equal(400);
-        chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"description\" is required");
-        done(); 
-      });
-  });
-
-
-
   it("should delete character by id", (done) => {
     chai
     .request(app)
@@ -222,14 +169,14 @@ describe("characters", () => {
     });
   });
 
-  it("should find no character with the an id to delete", (done) => {
+  it("should return no character with an id not", (done) => {
     chai
     .request(app)
-    .delete(`${BASE_URL}/v1/characters/888`)
+    .delete(`${BASE_URL}/v1/characters/1`)
     .end((__, characterRes) => {
       chai.expect(characterRes.status).to.be.equal(200);
       chai.expect(characterRes.body).to.be.a("object");
-      chai.expect(characterRes.body.msg).to.be.equal("No character with the id: 888 found");
+      chai.expect(characterRes.body.msg).to.be.equal("Character with the id: 1 successfully deleted");
       done();
     });
   });

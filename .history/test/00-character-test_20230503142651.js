@@ -195,15 +195,15 @@ describe("characters", () => {
       });
   });
 
-  it("should require description on character update", (done) => {
+  it("should require affinity on character update", (done) => {
     chai
       .request(app)
       .put(`${BASE_URL}/v1/characters/1`)
-      .send(characterNoDescription)
+      .send(characterNoAffinity)
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(400);
         chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"description\" is required");
+        chai.expect(characterRes.body.msg).to.be.equal("\"affinity\" is required");
         done(); 
       });
   });

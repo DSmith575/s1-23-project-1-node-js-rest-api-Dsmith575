@@ -231,7 +231,7 @@ const updateCharacter = async (req, res) => {
 
     if (!validAffinities.includes(affinity)) {
       return res.status(400).json({
-        msg: `Invalid affinity. Allowed values are ${validAffinities[0]}, ${validAffinities[1]}`,
+        msg: `Invalid affinity. Allowed values are ${validAffinities.join(", ")}}`,
       });
     }
 
@@ -270,6 +270,7 @@ const deleteCharacter = async (req, res) => {
     });
 
     return res.json({
+      msg: `Character with the id: ${id} successfully deleted`,
       data: character,
     });
   } catch (err) {

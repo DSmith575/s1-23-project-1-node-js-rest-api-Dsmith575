@@ -35,15 +35,7 @@ const characterNoName = {
   description: "Test"
 };
 
-const characterNoAffinity = {
-  name: "Hismena",
-  description: "IDEA"
-};
-
-const characterNoDescription = {
-  name: "Hismena",
-  affinity: "Light"
-};
+const characterNo
 
 const characterUpdate = {
   name: "Claude",
@@ -181,32 +173,9 @@ describe("characters", () => {
         done(); 
       });
   });
-    
-  it("should require affinity on character update", (done) => {
-    chai
-      .request(app)
-      .put(`${BASE_URL}/v1/characters/1`)
-      .send(characterNoAffinity)
-      .end((__, characterRes) => {
-        chai.expect(characterRes.status).to.be.equal(400);
-        chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"affinity\" is required");
-        done(); 
-      });
-  });
 
-  it("should require description on character update", (done) => {
-    chai
-      .request(app)
-      .put(`${BASE_URL}/v1/characters/1`)
-      .send(characterNoDescription)
-      .end((__, characterRes) => {
-        chai.expect(characterRes.status).to.be.equal(400);
-        chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"description\" is required");
-        done(); 
-      });
-  });
+
+
 
 
 

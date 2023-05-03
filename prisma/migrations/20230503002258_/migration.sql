@@ -58,6 +58,14 @@ CREATE TABLE "Affinity_bonus" (
     CONSTRAINT "Affinity_bonus_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "Personality" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "personality" TEXT NOT NULL,
+    "characterId" INTEGER NOT NULL,
+    CONSTRAINT "Personality_characterId_fkey" FOREIGN KEY ("characterId") REFERENCES "Character" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Attribute_characterId_key" ON "Attribute"("characterId");
 

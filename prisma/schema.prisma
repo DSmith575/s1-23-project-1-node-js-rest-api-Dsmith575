@@ -18,7 +18,6 @@ model Character {
   description   String
   attributes    Attribute?
   affinityBonus Affinity_bonus?
-  // accessoryType AccessoryType?
 }
 
 model Element {
