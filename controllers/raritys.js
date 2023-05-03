@@ -140,6 +140,7 @@ const deleteRarity = async (req, res) => {
     });
 
     return res.json({
+      msg: `Rarity with the id ${id} successfully deleted`,
       data: rarity,
     });
   } catch (err) {

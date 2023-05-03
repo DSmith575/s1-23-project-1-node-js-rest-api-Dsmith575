@@ -229,6 +229,7 @@ const deleteAffinity = async (req, res) => {
     });
 
     return res.json({
+      msg: `Affinity with the id: ${id} successfully deleted`,
       data: affinity,
     });
   } catch (err) {

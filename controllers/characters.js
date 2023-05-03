@@ -30,9 +30,6 @@ const getCharacter = async (req, res) => {
 
     const character = await prisma.character.findUnique({
       where: { id: Number(id) },
-      // include: {
-      //     attributes: true,
-      // },
       select: {
         id: true,
         name: true,
@@ -41,6 +38,11 @@ const getCharacter = async (req, res) => {
           select: {
             rarity: true,
             className: true,
+          },
+        },
+        element: {
+          select: {
+            element: true,
           },
         },
         affinity: true,
@@ -72,11 +74,6 @@ const getCharacter = async (req, res) => {
             end: true,
             spr: true,
             lck: true,
-          },
-        },
-        element: {
-          select: {
-            element: true,
           },
         },
       },
@@ -111,6 +108,11 @@ const getCharacters = async (req, res) => {
             className: true,
           },
         },
+        element: {
+          select: {
+            element: true,
+          },
+        },
         affinity: true,
         affinityBonus: {
           select: {
@@ -140,11 +142,6 @@ const getCharacters = async (req, res) => {
             end: true,
             spr: true,
             lck: true,
-          },
-        },
-        element: {
-          select: {
-            element: true,
           },
         },
       },

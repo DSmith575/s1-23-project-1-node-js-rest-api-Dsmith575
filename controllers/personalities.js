@@ -246,6 +246,7 @@ const deletePersonality = async (req, res) => {
     });
 
     return res.json({
+      msg: `Personality with the id ${id} successfully deleted`,
       data: personality,
     });
   } catch (err) {

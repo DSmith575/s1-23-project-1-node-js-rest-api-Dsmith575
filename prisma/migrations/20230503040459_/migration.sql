@@ -20,6 +20,7 @@ CREATE TABLE "Attribute" (
     "hp" INTEGER NOT NULL,
     "mp" INTEGER NOT NULL,
     "pwr" INTEGER NOT NULL,
+    "int" INTEGER NOT NULL,
     "spd" INTEGER NOT NULL,
     "end" INTEGER NOT NULL,
     "spr" INTEGER NOT NULL,

@@ -38,6 +38,15 @@ const getElement = async (req, res) => {
 
     const element = await prisma.element.findUnique({
       where: { id: Number(id) },
+      select: {
+        id: true,
+        character: {
+          select: {
+            name: true,
+          },
+        },
+        element: true,
+      },
     });
 
     if (!element) {
@@ -94,9 +103,21 @@ const createElement = async (req, res) => {
 
     const { element, characterId } = value;
 
+    //Custom validation, checks if input is the same as the strings inside validElements, if not, shows all available options
     if (!validElements.includes(element)) {
       return res.status(400).json({
         msg: `Invalid element, accepted values are ${validElements.join(", ")}`,
+      });
+    }
+
+    //Custom validation, this checks if a character already has an element with the same name.
+    const existingElement = await prisma.element.findFirst({
+      where: { element: element, characterId: characterId },
+    });
+
+    if (existingElement) {
+      return res.status(409).json({
+        msg: `Element with the value ${element} already exists for the character with the id ${characterId}`,
       });
     }
 
@@ -165,6 +186,7 @@ const deleteElement = async (req, res) => {
     });
 
     return res.json({
+      msg: `Element with the id: ${id} successfully deleted`,
       data: element,
     });
   } catch (err) {

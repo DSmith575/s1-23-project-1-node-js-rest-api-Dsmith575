@@ -32,6 +32,7 @@ model Attribute {
   hp          Int
   mp          Int
   pwr         Int
+  int         Int
   spd         Int
   end         Int
   spr         Int
@@ -132,3 +133,6 @@ model Personality {
 //     msg: `Rarity with the value ${rarity} already exists for the character with id ${characterId}`,
 //   });
 // }
+
+
+// Add validation checking to putting multiple rarites/elements/personalities on a character

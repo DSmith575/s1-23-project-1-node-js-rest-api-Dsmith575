@@ -20,6 +20,7 @@ const attributeSchema = Joi.object({
   hp: Joi.number().required(),
   mp: Joi.number().required(),
   pwr: Joi.number().required(),
+  int: Joi.number().required(),
   spd: Joi.number().required(),
   end: Joi.number().required(),
   spr: Joi.number().required(),
@@ -61,6 +62,7 @@ const getAttributes = async (req, res) => {
         hp: true,
         mp: true,
         pwr: true,
+        int: true,
         spd: true,
         end: true,
         spr: true,
@@ -98,10 +100,10 @@ const createAttribute = async (req, res) => {
       });
     }
 
-    const { hp, mp, pwr, spd, end, spr, lck, characterId } = value;
+    const { hp, mp, pwr, int, spd, end, spr, lck, characterId } = value;
 
     await prisma.attribute.create({
-      data: { hp, mp, pwr, spd, end, spr, lck, characterId },
+      data: { hp, mp, pwr, int, spd, end, spr, lck, characterId },
     });
 
     const newAttributes = await prisma.attribute.findMany({
@@ -132,11 +134,11 @@ const updateAttribute = async (req, res) => {
       });
     }
 
-    const { hp, mp, pwr, spd, end, spr, lck, characterId } = value;
+    const { hp, mp, pwr, int, spd, end, spr, lck, characterId } = value;
 
     const updatedAttribute = await prisma.attribute.update({
       where: { id: Number(id) },
-      data: { hp, mp, pwr, spd, end, spr, lck, characterId },
+      data: { hp, mp, pwr, int, spd, end, spr, lck, characterId },
     });
 
     return res.status(200).json({
@@ -169,6 +171,7 @@ const deleteAttribute = async (req, res) => {
     });
 
     return res.json({
+      msg: `Attribute with the id ${id} successfully deleted`,
       data: attribute,
     });
   } catch (err) {
