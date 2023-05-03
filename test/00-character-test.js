@@ -32,24 +32,24 @@ const characterAffinity = {
 
 const characterNoName = {
   affinity: "Light",
-  description: "Test"
+  description: "Test",
 };
 
 const characterNoAffinity = {
   name: "Hismena",
-  description: "IDEA"
+  description: "IDEA",
 };
 
 const characterNoDescription = {
   name: "Hismena",
-  affinity: "Light"
+  affinity: "Light",
 };
 
 const characterUpdate = {
   name: "Claude",
   affinity: "Light",
-  description: "test"
-}
+  description: "test",
+};
 
 describe("characters", () => {
   it("should create a character", (done) => {
@@ -162,13 +162,13 @@ describe("characters", () => {
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(200);
         chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("Character with the id: 1 successfully updated");
-        done(); 
+        chai
+          .expect(characterRes.body.msg)
+          .to.be.equal("Character with the id: 1 successfully updated");
+        done();
       });
   });
 
-
-  
   it("should require name on character update", (done) => {
     chai
       .request(app)
@@ -177,11 +177,11 @@ describe("characters", () => {
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(400);
         chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"name\" is required");
-        done(); 
+        chai.expect(characterRes.body.msg).to.be.equal('"name" is required');
+        done();
       });
   });
-    
+
   it("should require affinity on character update", (done) => {
     chai
       .request(app)
@@ -190,8 +190,10 @@ describe("characters", () => {
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(400);
         chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"affinity\" is required");
-        done(); 
+        chai
+          .expect(characterRes.body.msg)
+          .to.be.equal('"affinity" is required');
+        done();
       });
   });
 
@@ -203,38 +205,40 @@ describe("characters", () => {
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(400);
         chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.msg).to.be.equal("\"description\" is required");
-        done(); 
+        chai
+          .expect(characterRes.body.msg)
+          .to.be.equal('"description" is required');
+        done();
       });
   });
 
-
-
   it("should delete character by id", (done) => {
     chai
-    .request(app)
-    .delete(`${BASE_URL}/v1/characters/1`)
-    .end((__, characterRes) => {
-      chai.expect(characterRes.status).to.be.equal(200);
-      chai.expect(characterRes.body).to.be.a("object");
-      chai.expect(characterRes.body.msg).to.be.equal("Character with the id: 1 successfully deleted");
-      done();
-    });
+      .request(app)
+      .delete(`${BASE_URL}/v1/characters/1`)
+      .end((__, characterRes) => {
+        chai.expect(characterRes.status).to.be.equal(200);
+        chai.expect(characterRes.body).to.be.a("object");
+        chai
+          .expect(characterRes.body.msg)
+          .to.be.equal("Character with the id: 1 successfully deleted");
+        done();
+      });
   });
 
   it("should find no character with the an id to delete", (done) => {
     chai
-    .request(app)
-    .delete(`${BASE_URL}/v1/characters/888`)
-    .end((__, characterRes) => {
-      chai.expect(characterRes.status).to.be.equal(200);
-      chai.expect(characterRes.body).to.be.a("object");
-      chai.expect(characterRes.body.msg).to.be.equal("No character with the id: 888 found");
-      done();
-    });
+      .request(app)
+      .delete(`${BASE_URL}/v1/characters/888`)
+      .end((__, characterRes) => {
+        chai.expect(characterRes.status).to.be.equal(200);
+        chai.expect(characterRes.body).to.be.a("object");
+        chai
+          .expect(characterRes.body.msg)
+          .to.be.equal("No character with the id: 888 found");
+        done();
+      });
   });
-
-
 
   // it("should create a require a name on create", (done) => {
   //   chai
@@ -250,10 +254,4 @@ describe("characters", () => {
   //       done();
   //     });
   // });
-
-
-
-
-
-
 });

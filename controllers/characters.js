@@ -231,7 +231,9 @@ const updateCharacter = async (req, res) => {
 
     if (!validAffinities.includes(affinity)) {
       return res.status(400).json({
-        msg: `Invalid affinity. Allowed values are ${validAffinities.join(", ")}}`,
+        msg: `Invalid affinity. Allowed values are ${validAffinities.join(
+          ", "
+        )}}`,
       });
     }
 
