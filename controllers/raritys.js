@@ -68,6 +68,28 @@ const createRarity = async (req, res) => {
       });
     }
 
+        //Custom validation, this checks if a character already has an element with the same name.
+        const existingRarity = await prisma.rarity.findFirst({
+          where: { rarity: rarity, characterId: characterId },
+        });
+
+        //Checks if the class name already exists on a character
+        const existingClassName = await prisma.rarity.findFirst({
+          where: { className: className, characterId: characterId },
+        });
+    
+        if (existingRarity) {
+          return res.status(409).json({
+            msg: `Rarity with the rarity ${rarity} already exists for the character with the id ${characterId}`,
+          });
+        };
+
+        if (existingClassName) {
+          return res.status(409).json({
+            msg: `Rarity with the class name ${className} already exists for the character with the id ${characterId}`,
+          });
+        };
+
     await prisma.rarity.create({
       data: { rarity, className, characterId },
     });

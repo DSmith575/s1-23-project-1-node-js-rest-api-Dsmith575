@@ -135,4 +135,4 @@ model Personality {
 // }
 
 
-// Add validation checking to putting multiple rarites/elements/personalities on a character
+// Add validation checking to putting multiple rarites/personalities on a character

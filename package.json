@@ -5,14 +5,14 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "nodemon": "nodemon app.js",
+    "dev": "nodemon app.js",
     "prisma": "prisma studio",
     "commit": "git-cz",
     "format": "prettier --write .",
     "p:check": "npx prettier --check .",
     "p:write": "npx pretty-quick --staged",
     "migrate": "prisma migrate reset --force && prisma migrate dev",
-    "test": "npx prisma migrate reset && npx mocha --timeout 10000 --exit"
+    "test": "set NODE_ENV=testing&& npx prisma migrate reset && npx mocha --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
