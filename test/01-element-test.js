@@ -14,12 +14,12 @@ const character = {
   name: "Moonlight Flower",
   affinity: "Shadow",
   description:
-  "The young heiress of the famous Lunabright family of Elzion. She's served as the family head stand-in for some time. While she's had a first-rate education and training in the arts, she's ignorant of the world at large. She carriers herself with elegance and grace, but acts more her age with people she trusts.",
+    "The young heiress of the famous Lunabright family of Elzion. She's served as the family head stand-in for some time. While she's had a first-rate education and training in the arts, she's ignorant of the world at large. She carriers herself with elegance and grace, but acts more her age with people she trusts.",
 };
 
 const test = {
-  "element": "Water",
-  "characterId": 3
+  element: "Water",
+  characterId: 3,
 };
 
 describe("elements", () => {
@@ -52,7 +52,4 @@ describe("elements", () => {
         done();
       });
   });
-
-
-
 });

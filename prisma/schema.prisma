@@ -21,7 +21,7 @@ model Character {
 }
 
 model Element {
-  id          Int       @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   element     String
   character   Character @relation(fields: [characterId], references: [id])
   characterId Int
