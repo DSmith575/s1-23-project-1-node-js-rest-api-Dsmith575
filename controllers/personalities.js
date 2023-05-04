@@ -171,6 +171,7 @@ const createPersonality = async (req, res) => {
 
     const { personality, characterId } = value;
 
+    // Checks if input is the same as any of required names
     if (!validPersonalities.includes(personality)) {
       return res.status(400).json({
         msg: `Invalid personality, accepted values are ${validPersonalities.join(
@@ -179,6 +180,7 @@ const createPersonality = async (req, res) => {
       });
     }
 
+    // Custom validation to check if a personality with the same name exists on a character
     const existingPersonality = await prisma.personality.findFirst({
       where: { personality: personality, characterId: characterId },
     });
@@ -218,6 +220,26 @@ const updatePersonality = async (req, res) => {
     }
 
     const { personality, characterId } = value;
+
+    // Checks if input is the same as any of required names
+    if (!validPersonalities.includes(personality)) {
+      return res.status(400).json({
+        msg: `Invalid personality, accepted values are ${validPersonalities.join(
+          ", "
+        )}`,
+      });
+    }
+
+    // Custom validation to check if a personality with the same name exists on a character
+    const existingPersonality = await prisma.personality.findFirst({
+      where: { personality: personality, characterId: characterId },
+    });
+
+    if (existingPersonality) {
+      return res.status(409).json({
+        msg: `Personality with the value ${personality} already exists for the character with the id ${characterId}`,
+      });
+    }
 
     const updatedPersonality = await prisma.personality.update({
       where: { id: Number(id) },

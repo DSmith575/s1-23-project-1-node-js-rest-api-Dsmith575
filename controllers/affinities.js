@@ -38,9 +38,6 @@ const getAffinity = async (req, res) => {
 
     const affinity = await prisma.affinity_bonus.findUnique({
       where: { id: Number(id) },
-      //include {
-      //x: true,
-      //},
     });
 
     if (!affinity) {
@@ -130,11 +127,7 @@ const createAffinities = async (req, res) => {
       },
     });
 
-    const newAffinities = await prisma.affinity_bonus.findMany({
-      // include: {
-      //     rarity: true,
-      // },
-    });
+    const newAffinities = await prisma.affinity_bonus.findMany({});
 
     return res.status(201).json({
       msg: "Character affinity created successfully",

@@ -32,9 +32,6 @@ const getAttribute = async (req, res) => {
 
     const attribute = await prisma.attribute.findUnique({
       where: { id: Number(id) },
-      // include: {
-      //     rarity: true,
-      // },
     });
 
     if (!attribute) {
@@ -67,7 +64,7 @@ const getAttributes = async (req, res) => {
         lck: true,
         characterId: true,
         character: {
-          // Include the related Attributes model
+          // Include the character name with the data
           select: {
             name: true,
           },
@@ -104,11 +101,7 @@ const createAttribute = async (req, res) => {
       data: { hp, mp, pwr, int, spd, end, spr, lck, characterId },
     });
 
-    const newAttributes = await prisma.attribute.findMany({
-      // include: {
-      //     rarity: true,
-      // },
-    });
+    const newAttributes = await prisma.attribute.findMany({});
 
     return res.status(201).json({
       msg: "Character attribute created successfully",

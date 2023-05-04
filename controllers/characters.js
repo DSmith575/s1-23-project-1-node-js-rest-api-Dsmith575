@@ -43,6 +43,11 @@ const getCharacter = async (req, res) => {
             element: true,
           },
         },
+        personality: {
+          select: {
+            personality: true,
+          },
+        },
         affinity: true,
         affinityBonus: {
           select: {
@@ -68,6 +73,7 @@ const getCharacter = async (req, res) => {
             hp: true,
             mp: true,
             pwr: true,
+            int: true,
             spd: true,
             end: true,
             spr: true,
@@ -111,6 +117,11 @@ const getCharacters = async (req, res) => {
             element: true,
           },
         },
+        personality: {
+          select: {
+            personality: true,
+          },
+        },
         affinity: true,
         affinityBonus: {
           select: {
@@ -136,6 +147,7 @@ const getCharacters = async (req, res) => {
             hp: true,
             mp: true,
             pwr: true,
+            int: true,
             spd: true,
             end: true,
             spr: true,
@@ -178,7 +190,6 @@ const createCharacter = async (req, res) => {
       });
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
     //Check if a character already exists with the name trying to create
     const existingCharacter = await prisma.character.findFirst({
       where: {
@@ -224,11 +235,27 @@ const updateCharacter = async (req, res) => {
 
     const { name, description, affinity } = value;
 
+    // Validate affinity
     if (!validAffinities.includes(affinity)) {
       return res.status(400).json({
         msg: `Invalid affinity. Allowed values are ${validAffinities.join(
           ", "
         )}}`,
+      });
+    }
+
+    //Check if a character already exists with the name trying to create
+    const existingCharacter = await prisma.character.findFirst({
+      where: {
+        name: {
+          contains: name.toLowerCase(), // Perform case-insensitive search
+        },
+      },
+    });
+
+    if (existingCharacter) {
+      return res.status(409).json({
+        msg: `Character with the name ${name} already exists in the database`,
       });
     }
 
