@@ -1,15 +1,13 @@
 /**
- * API Controller for managing character data.
+ * API Route for the affinities controller
  *
- * This controller handles CRUD operations related to character creation
+ * This route handles operations related to the affinities controller
  *
- * @file: elements.js
+ * @file: affinities.js
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
  * @created: 2023-04-19
- * @updated: 2023-04-19
- *
- * @SCHEMA
+ * @updated: 2023-05-04
  */
 
 import { Router } from "express";

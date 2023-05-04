@@ -1,15 +1,13 @@
 /**
- * API Controller for managing character data.
+ * API Controller for managing character affinity bonus data.
  *
- * This controller handles CRUD operations related to character creation
+ * This controller handles CRUD operations related to affinity creation
  *
- * @file: characters.js
+ * @file: affinities.js
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
  * @created: 2023-04-17
- * @updated: 2023-04-17
- *
- * @SCHEMA
+ * @updated: 2023-05-04
  */
 
 import { PrismaClient } from "@prisma/client";

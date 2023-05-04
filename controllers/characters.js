@@ -7,9 +7,7 @@
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
  * @created: 2023-04-17
- * @updated: 2023-04-17
- *
- * @SCHEMA
+ * @updated: 2023-05-04
  */
 
 import { PrismaClient } from "@prisma/client";

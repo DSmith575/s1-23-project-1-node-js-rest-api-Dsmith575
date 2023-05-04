@@ -103,14 +103,6 @@ model Personality {
 
 // const validAccessoryType = ["Bangle", "Necklace", "Ring"]
 
-// model Personalities {
-//   id          Int       @id @default(autoincrement())
-//   personality String
-//   character   Character @relation(fields: [characterId], references: [id])
-//   characterId Int
-// }
-
-
 
 // Validate weapon value before creating a new Character
 // if (!validWeaponValues.includes(newCharacter.weapon)) {

@@ -1,19 +1,17 @@
 /**
- * API Controller for managing elemental data.
+ * API Controller for managing character personality data.
  *
- * This controller handles CRUD operations related to element creation
+ * This controller handles CRUD operations related to personality creation
  *
  * @file: personalities.js
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
  * @created: 2023-04-19
- * @updated: 2023-04-19
- *
- * @SCHEMA
+ * @updated: 2023-05-04
  */
 
 import { PrismaClient } from "@prisma/client";
-import Joi, { valid } from "joi";
+import Joi from "joi";
 const prisma = new PrismaClient();
 
 const personalitySchema = Joi.object({
@@ -181,8 +179,18 @@ const createPersonality = async (req, res) => {
       });
     }
 
+    const existingPersonality = await prisma.personality.findFirst({
+      where: { personality: personality, characterId: characterId },
+    });
+
+    if (existingPersonality) {
+      return res.status(409).json({
+        msg: `Personality with the value ${personality} already exists for the character with the id ${characterId}`,
+      });
+    }
+
     await prisma.personality.create({
-      data: { element, characterId },
+      data: { personality, characterId },
     });
 
     const newPersonalities = await prisma.personality.findMany({});

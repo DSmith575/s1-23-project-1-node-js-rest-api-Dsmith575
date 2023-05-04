@@ -1,3 +1,15 @@
+/**
+ * API Controller for managing character rarity data.
+ *
+ * This controller handles CRUD operations related to rarity creation
+ *
+ * @file: raritys.js
+ * @version: 1.0.0
+ * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
+ * @created: 2023-04-19
+ * @updated: 2023-05-04
+ */
+
 import { PrismaClient } from "@prisma/client";
 import Joi from "joi";
 const prisma = new PrismaClient();
@@ -68,27 +80,27 @@ const createRarity = async (req, res) => {
       });
     }
 
-        //Custom validation, this checks if a character already has an element with the same name.
-        const existingRarity = await prisma.rarity.findFirst({
-          where: { rarity: rarity, characterId: characterId },
-        });
+    //Custom validation, this checks if a character already has an element with the same name.
+    const existingRarity = await prisma.rarity.findFirst({
+      where: { rarity: rarity, characterId: characterId },
+    });
 
-        //Checks if the class name already exists on a character
-        const existingClassName = await prisma.rarity.findFirst({
-          where: { className: className, characterId: characterId },
-        });
-    
-        if (existingRarity) {
-          return res.status(409).json({
-            msg: `Rarity with the rarity ${rarity} already exists for the character with the id ${characterId}`,
-          });
-        };
+    //Checks if the class name already exists on a character
+    const existingClassName = await prisma.rarity.findFirst({
+      where: { className: className, characterId: characterId },
+    });
 
-        if (existingClassName) {
-          return res.status(409).json({
-            msg: `Rarity with the class name ${className} already exists for the character with the id ${characterId}`,
-          });
-        };
+    if (existingRarity) {
+      return res.status(409).json({
+        msg: `Rarity of ${rarity} already exists for the character with the id ${characterId}`,
+      });
+    }
+
+    if (existingClassName) {
+      return res.status(409).json({
+        msg: `Rarity with the class name ${className} already exists for the character with the id ${characterId}`,
+      });
+    }
 
     await prisma.rarity.create({
       data: { rarity, className, characterId },
@@ -162,7 +174,7 @@ const deleteRarity = async (req, res) => {
     });
 
     return res.json({
-      msg: `Rarity with the id ${id} successfully deleted`,
+      msg: `Rarity with the id: ${id} successfully deleted`,
       data: rarity,
     });
   } catch (err) {

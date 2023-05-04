@@ -1,5 +1,5 @@
 /**
- * API Controller for managing elemental data.
+ * API Controller for managing character element data.
  *
  * This controller handles CRUD operations related to element creation
  *
@@ -7,9 +7,7 @@
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
  * @created: 2023-04-19
- * @updated: 2023-04-19
- *
- * @SCHEMA
+ * @updated: 2023-05-04
  */
 
 import { PrismaClient } from "@prisma/client";

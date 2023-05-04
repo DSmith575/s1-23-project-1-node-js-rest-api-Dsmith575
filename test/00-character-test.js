@@ -24,6 +24,12 @@ const characterTwo = {
     "A warrior from Chronos Empire. Scouted to join the Emperial Army's arbiters, she was dispatched to the world of Meks. Cautious of others, she prefers fighting to talking, and is considered dangerous even by arbiter standards. A strange steam creature Tetra follows her around.",
 };
 
+const characterThree = {
+  name: "March",
+  affinity: "Light",
+  description: "test",
+};
+
 const characterAffinity = {
   name: "Isuka",
   affinity: "not valid",
@@ -82,6 +88,18 @@ describe("characters", () => {
       });
   });
 
+  it("should return a 201 status when character is created", (done) => {
+    chai
+      .request(app)
+      .post(`${BASE_URL}/v1/characters`)
+      .send(characterThree)
+      .end((__, characterRes) => {
+        chai.expect(characterRes).to.have.status(201);
+        chai.expect(characterRes.body).to.be.a("object");
+        done();
+      });
+  });
+
   it("should check if name is already in the database", (done) => {
     chai
       .request(app)
@@ -114,30 +132,27 @@ describe("characters", () => {
       });
   });
 
-  it("should get character by id", (done) => {
-    chai
-      .request(app)
-      .get(`${BASE_URL}/v1/characters/1`)
-      .end((__, characterRes) => {
-        //      console.log(characterRes);
-        chai.expect(characterRes.status).to.be.equal(200);
-        chai.expect(characterRes.body).to.be.a("object");
-        chai.expect(characterRes.body.data).to.be.a("object");
-        done();
-      });
-  });
-
   it("should not find a character with an id not created", (done) => {
     chai
       .request(app)
       .get(`${BASE_URL}/v1/characters/9999`)
       .end((__, characterRes) => {
-        //      console.log(characterRes);
         chai.expect(characterRes.status).to.be.equal(200);
         chai.expect(characterRes.body).to.be.a("object");
         chai
           .expect(characterRes.body.msg)
           .to.be.equal("No Character with the id: 9999 found");
+        done();
+      });
+  });
+
+  it("should return a character with the field name", (done) => {
+    chai
+      .request(app)
+      .get(`${BASE_URL}/v1/characters/1`)
+      .end((__, characterRes) => {
+        chai.expect(characterRes.status).to.be.equal(200);
+        chai.expect(characterRes.body.data).to.have.property("name");
         done();
       });
   });
@@ -240,18 +255,16 @@ describe("characters", () => {
       });
   });
 
-  // it("should create a require a name on create", (done) => {
-  //   chai
-  //     .request(app)
-  //     .post(`${BASE_URL}/v1/characters`)
-  //     .send(characterNoName)
-  //     .end((__, characterRes) => {
-  //       chai.expect(characterRes.status).to.be.equal(400);
-  //       chai.expect(characterRes.body).to.be.a("object");
-  //       chai
-  //         .expect(characterRes.body.msg)
-  //         .to.be.equal("name is required");
-  //       done();
-  //     });
-  // });
+  it("should require a name on create", (done) => {
+    chai
+      .request(app)
+      .post(`${BASE_URL}/v1/characters`)
+      .send(characterNoName)
+      .end((__, characterRes) => {
+        chai.expect(characterRes.status).to.be.equal(400);
+        chai.expect(characterRes.body).to.be.a("object");
+        chai.expect(characterRes.body.msg).to.be.equal('"name" is required');
+        done();
+      });
+  });
 });
