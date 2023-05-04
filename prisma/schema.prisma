@@ -113,3 +113,9 @@ model Personality {
 // if (!validWeaponValues.includes(updatedCharacter.weapon)) {
 //   throw new Error(`Invalid weapon value: ${updatedCharacter.weapon}`);
 // }
+
+
+
+// Add filter, sorting, pagination for raritys/personalities
+
+//finish testing
