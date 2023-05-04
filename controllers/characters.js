@@ -22,6 +22,11 @@ const characterSchema = Joi.object({
 
 const validAffinities = ["Light", "Shadow"];
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const getCharacter = async (req, res) => {
   try {
     const { id } = req.params;
@@ -101,7 +106,18 @@ const getCharacter = async (req, res) => {
 
 const getCharacters = async (req, res) => {
   try {
-    const characters = await prisma.character.findMany({
+    const sortBy = req.query.sortBy || "name";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
       select: {
         id: true,
         name: true,
@@ -155,13 +171,30 @@ const getCharacters = async (req, res) => {
           },
         },
       },
-    });
+    };
+
+    if (req.query.name || req.query.affinity) {
+      query.where = {
+        name: {
+          in: req.query.name || undefined,
+        },
+        affinity: {
+          in: req.query.affinity || undefined,
+        },
+      };
+    }
+
+    const characters = await prisma.character.findMany(query);
 
     if (characters.length === 0) {
       return res.status(200).json({ msg: "No characters found" });
     }
+
+    const hasNextPage = characters.length === Number(amount);
+
     return res.json({
       data: characters,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {
     return res.status(500).json({

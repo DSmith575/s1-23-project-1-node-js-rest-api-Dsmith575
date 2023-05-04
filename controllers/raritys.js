@@ -94,13 +94,13 @@ const createRarity = async (req, res) => {
       return res.status(409).json({
         msg: `Rarity of ${rarity} already exists for the character with the id ${characterId}`,
       });
-    };
+    }
 
     if (existingClassName) {
       return res.status(409).json({
         msg: `Rarity with the class name ${className} already exists for the character with the id ${characterId}`,
       });
-    };
+    }
 
     await prisma.rarity.create({
       data: { rarity, className, characterId },
@@ -128,7 +128,7 @@ const updateRarity = async (req, res) => {
       return res.status(400).json({
         msg: error.details[0].message,
       });
-    };
+    }
 
     const { rarity, className, characterId } = value;
 
@@ -137,7 +137,7 @@ const updateRarity = async (req, res) => {
       return res.status(400).json({
         msg: `Invalid rarity. Allowed values are ${validRarities.join(", ")}`,
       });
-    };
+    }
 
     //Custom validation, this checks if a character already has an rarity with the same value.
     const existingRarity = await prisma.rarity.findFirst({

@@ -32,7 +32,7 @@ const elementNoElement = {
 };
 
 const elementUpdate = {
-  element: "Fire",
+  element: "Wind",
   characterId: 3,
 };
 

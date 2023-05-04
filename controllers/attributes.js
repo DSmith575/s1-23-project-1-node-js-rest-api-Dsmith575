@@ -26,6 +26,11 @@ const attributeSchema = Joi.object({
   characterId: Joi.number().required(),
 });
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const getAttribute = async (req, res) => {
   try {
     const { id } = req.params;
@@ -52,8 +57,25 @@ const getAttribute = async (req, res) => {
 
 const getAttributes = async (req, res) => {
   try {
-    const attributes = await prisma.attribute.findMany({
+    const sortBy = req.query.sortBy || "characterId";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
       select: {
+        character: {
+          select: {
+            name: true,
+          },
+        },
+        characterId: true,
         hp: true,
         mp: true,
         pwr: true,
@@ -62,21 +84,58 @@ const getAttributes = async (req, res) => {
         end: true,
         spr: true,
         lck: true,
-        characterId: true,
-        character: {
-          // Include the character name with the data
-          select: {
-            name: true,
-          },
-        },
       },
-    });
+    };
+
+    if (
+      req.query.hp ||
+      req.query.mp ||
+      req.query.pwr ||
+      req.query.int ||
+      req.query.spd ||
+      req.query.end ||
+      req.query.spr ||
+      req.query.lck
+    ) {
+      query.where = {
+        hp: {
+          equals: Number(req.query.hp) || undefined,
+        },
+        mp: {
+          equals: Number(req.query.mp) || undefined,
+        },
+        pwr: {
+          equals: Number(req.query.pwr) || undefined,
+        },
+        int: {
+          equals: Number(req.query.int) || undefined,
+        },
+        spd: {
+          equals: Number(req.query.spd) || undefined,
+        },
+        end: {
+          equals: Number(req.query.end) || undefined,
+        },
+        spr: {
+          equals: Number(req.query.spr) || undefined,
+        },
+        lck: {
+          equals: Number(req.query.lck) || undefined,
+        },
+      };
+    }
+
+    const attributes = await prisma.attribute.findMany(query);
 
     if (attributes.length === 0) {
       return res.status(200).json({ msg: "No attributes found" });
     }
+
+    const hasNextPage = attributes.length === Number(amount);
+
     return res.json({
       data: attributes,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {
     return res.status(500).json({

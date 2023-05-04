@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express, { urlencoded, json } from "express";
 import { loadEnv } from "./loadEnv.cjs";
-//  rateLimit
+import rateLimit from "express-rate-limit";
 
 import characters from "./routes/characters.js";
 import attributes from "./routes/attributes.js";
@@ -21,6 +21,13 @@ const PORT = process.env.PORT;
 
 app.use(urlencoded({ extended: false }));
 app.use(json());
+
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 5, // limit each IP to 100 requests per windowMs
+// });
+
+// app.use(limiter);
 
 app.use(`/${BASE_URL}/${VERSION}/characters`, characters);
 app.use(`/${BASE_URL}/${VERSION}/attributes`, attributes);

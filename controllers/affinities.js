@@ -32,6 +32,11 @@ const affinitySchema = Joi.object({
   characterId: Joi.number().required(),
 });
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const getAffinity = async (req, res) => {
   try {
     const { id } = req.params;
@@ -58,19 +63,61 @@ const getAffinity = async (req, res) => {
 
 const getAffinities = async (req, res) => {
   try {
-    const affinities = await prisma.affinity_bonus.findMany({
-      character: {
-        select: {
-          name: true,
-        },
+    const sortBy = req.query.sortBy || "characterId";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
       },
-    });
+      select: {
+        character: {
+          select: {
+            name: true,
+          },
+        },
+        characterId: true,
+        bonus5: true,
+        bonus15: true,
+        bonus30: true,
+        bonus50: true,
+        bonus75: true,
+        bonus80: true,
+        bonus105: true,
+        bonus120: true,
+        bonus140: true,
+        bonus175: true,
+        bonus200: true,
+        bonus215: true,
+        bonus225: true,
+        bonus255: true,
+      },
+    };
+
+    if (req.query.affinities) {
+      query.where = {
+        characterId: {
+          in: req.query.characterId || undefined,
+        },
+      };
+    }
+
+    const affinities = await prisma.affinity_bonus.findMany(query);
 
     if (affinities.length === 0) {
       return res.status(200).json({ msg: "No affinities found" });
     }
+
+    const hasNextPage = affinities.length === Number(amount);
+
     return res.json({
       data: affinities,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {
     return res.status(500).json({

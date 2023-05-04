@@ -30,6 +30,11 @@ const validElements = [
   "Crystal",
 ];
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const getElement = async (req, res) => {
   try {
     const { id } = req.params;
@@ -65,7 +70,18 @@ const getElement = async (req, res) => {
 
 const getElements = async (req, res) => {
   try {
-    const elements = await prisma.element.findMany({
+    const sortBy = req.query.sortBy || "element";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
       select: {
         character: {
           select: {
@@ -74,13 +90,27 @@ const getElements = async (req, res) => {
         },
         element: true,
       },
-    });
+    };
+
+    if (req.query.element) {
+      query.where = {
+        element: {
+          in: req.query.element || undefined,
+        },
+      };
+    }
+
+    const elements = await prisma.element.findMany(query);
 
     if (elements.length === 0) {
       return res.status(200).json({ msg: "No elements found" });
     }
+
+    const hasNextPage = elements.length === Number(amount);
+
     return res.json({
       data: elements,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {
     return res.status(500).json({
