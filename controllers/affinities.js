@@ -262,7 +262,7 @@ const deleteAffinity = async (req, res) => {
         .json({ msg: `No affinity with the id: ${id} found` });
     }
 
-    await prisma.affinity.delete({
+    await prisma.affinity_bonus.delete({
       where: { id: Number(id) },
     });
 
