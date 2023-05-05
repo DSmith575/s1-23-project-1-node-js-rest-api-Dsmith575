@@ -221,7 +221,7 @@ const deleteAttribute = async (req, res) => {
     });
 
     return res.json({
-      msg: `Attribute with the id ${id} successfully deleted`,
+      msg: `Attribute with the id: ${id} successfully deleted`,
       data: attribute,
     });
   } catch (err) {

@@ -109,6 +109,11 @@ const validPersonalities = [
   "Hammer",
 ];
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const getPersonality = async (req, res) => {
   try {
     const { id } = req.params;
@@ -135,7 +140,18 @@ const getPersonality = async (req, res) => {
 
 const getPersonalities = async (req, res) => {
   try {
-    const personalities = await prisma.personality.findMany({
+    const sortBy = req.query.sortBy || "personality";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
       select: {
         character: {
           select: {
@@ -143,14 +159,33 @@ const getPersonalities = async (req, res) => {
           },
         },
         personality: true,
+        characterId: true,
       },
-    });
+    };
+
+    if (req.query.personalities) {
+      query.where = {
+        personality: {
+          in: req.query.personality || undefined,
+        },
+      };
+    }
+
+    const personalities = await prisma.personality.findMany(query);
 
     if (personalities.length === 0) {
       return res.status(200).json({ msg: "No personalities found" });
     }
+
+    const hasNextPage = personalities.length === Number(amount);
     return res.json({
       data: personalities,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
+    });
+
+    return res.json({
+      data: affinities,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {
     return res.status(500).json({

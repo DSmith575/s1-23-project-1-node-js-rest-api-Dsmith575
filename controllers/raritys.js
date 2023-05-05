@@ -22,6 +22,11 @@ const raritySchema = Joi.object({
 
 const validRarities = [2, 3, 4, 5];
 
+const paginationDefault = {
+  amount: 10, // The number of items per page
+  page: 1, // The page number
+};
+
 const getRarity = async (req, res) => {
   try {
     const { id } = req.params;
@@ -46,13 +51,49 @@ const getRarity = async (req, res) => {
 
 const getRarities = async (req, res) => {
   try {
-    const rarities = await prisma.rarity.findMany({});
+    const sortBy = req.query.sortBy || "rarity";
+    const sortOrder = req.query.sortOrder === "desc" ? "desc" : "asc";
+
+    const amount = req.query.amount || paginationDefault.amount;
+    const page = req.query.page || paginationDefault.page;
+
+    const query = {
+      take: Number(amount),
+      skip: (Number(page) - 1) * Number(amount),
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
+      select: {
+        character: {
+          select: {
+            name: true,
+          },
+        },
+        rarity: true,
+        className: true,
+        characterId: true,
+      },
+    };
+
+    if (req.query.rarity) {
+      query.where = {
+        rarity: {
+          in: req.query.rarity || undefined,
+        },
+      };
+    }
+
+    const rarities = await prisma.rarity.findMany(query);
 
     if (rarities.length === 0) {
       return res.status(200).json({ msg: "No rarities found" });
     }
+
+    const hasNextPage = rarities.length === Number(amount);
+
     return res.json({
       data: rarities,
+      nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {
     return res.status(500).json({
