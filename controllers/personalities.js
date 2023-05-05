@@ -198,7 +198,7 @@ const createPersonality = async (req, res) => {
     const newPersonalities = await prisma.personality.findMany({});
 
     return res.status(201).json({
-      msg: "Character element created successfully",
+      msg: "Personality successfully created",
       data: newPersonalities,
     });
   } catch (err) {
@@ -247,7 +247,7 @@ const updatePersonality = async (req, res) => {
     });
 
     return res.status(200).json({
-      msg: `Personality with the id: ${id} successfully created`,
+      msg: `Personality with the id: ${id} successfully updated`,
       data: updatedPersonality,
     });
   } catch (err) {
@@ -276,7 +276,7 @@ const deletePersonality = async (req, res) => {
     });
 
     return res.json({
-      msg: `Personality with the id ${id} successfully deleted`,
+      msg: `Personality with the id: ${id} successfully deleted`,
       data: personality,
     });
   } catch (err) {
