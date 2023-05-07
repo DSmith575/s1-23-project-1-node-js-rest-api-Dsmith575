@@ -15,7 +15,8 @@ This uses information from the video game Another Eden as the basis for my proje
 * In the env use `PORT=3000`  
 * Create a .env.development file in the root directory  
 * Create a .env.testing file in the root directory  
-* Run `npm run migrate` To migrate the db
+* Run `npm run migrate` To migrate the db  
+* Save if auto-save isn't turned on
 
 #### .env.development  
 Place the following inside  
@@ -26,6 +27,8 @@ Place the following inside
 Place the following inside  
 `NODE_ENV=testing`  
 `DATABASE_URL=file:./test.db`
+
+
 
 
 ### Script commands
