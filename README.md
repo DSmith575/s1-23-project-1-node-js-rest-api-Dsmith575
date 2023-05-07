@@ -55,6 +55,10 @@ Can also use
 `/api/v1/elements`  
 `/api/v1/personalities`
 
+### Examples
+----
+
+
 ### Packages Used
 ----
 * NodeJS  
@@ -70,6 +74,8 @@ Can also use
 
 ### References
 ----
-Prisma documentation  
-chai documentation  
-mocha documentation  
+[Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-schema)  
+[Prisma relations](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)  
+[Chai documentation](https://www.chaijs.com/guide/)  
+[Chai assertion](https://www.chaijs.com/guide/styles/)  
+[Mocha documentation](https://mochajs.org/api/mocha)  
