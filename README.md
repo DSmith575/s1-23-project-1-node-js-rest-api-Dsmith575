@@ -28,9 +28,6 @@ Place the following inside
 `NODE_ENV=testing`  
 `DATABASE_URL=file:./test.db`
 
-
-
-
 ### Script commands
 ----
 `npm run dev` Run in the dev environment  
@@ -44,6 +41,7 @@ Can also use
 ```js
 localhost:3000/
 ```
+Will display a list of endpoints
 ----
 | `localhost:[PORT]` | api/v1 | Endpoint |
 | --- | --- | --- |
@@ -61,10 +59,83 @@ localhost:3000/
 `/api/v1/elements`  
 `/api/v1/personalities`
 
-### Examples
+### Example inputs
 ----
+`/characters`
+```js
+"name": "Example name",
+"affinity": "Light",
+"description": "This is a character description"
+```  
+`/rarities`
+```js
+"rarity": 3,
+"className": "Warrior",
+"characterId": 1
+```  
+`/affinities`
+```js
+  "bonus5": "SPD +5",
+  "bonus15": "PWR +10",
+  "bonus30": "INT + 3",
+  "bonus50": "END + 10",
+  "bonus75": "LCK + 40",
+  "bonus80": "Skill Slot +1",
+  "bonus105": "SPD + 20",
+  "bonus120": "PWR + 20",
+  "bonus140": "Grasta Slot +1",
+  "bonus175": "INT + 2",
+  "bonus200": "HP + 300",
+  "bonus215": "MP + 200",
+  "bonus225": "Badge Slot +1",
+  "bonus255": "All Stats +10"
+```
 
-Will display all available endpoints
+### Example Ouputs
+----
+`/characters`
+```js
+        {
+            "id": 6,
+            "name": "Abc",
+            "description": "Test",
+            "rarity": [],
+            "element": [],
+            "personality": [],
+            "affinity": "Light",
+            "affinityBonus": null,
+            "attributes": null
+},
+```
+
+`/rarities`
+```js
+            "character": {
+                "name": "Violet Lancer"
+            },
+            "rarity": 5,
+            "className": "Persephone",
+            "characterId": 5
+        }
+```
+
+`/attributes`
+```js
+  {
+            "character": {
+                "name": "Violet Lancer"
+            },
+            "characterId": 5,
+            "hp": 4044,
+            "mp": 413,
+            "pwr": 286,
+            "int": 146,
+            "spd": 272,
+            "end": 214,
+            "spr": 178,
+            "lck": 205
+        }
+```
 
 ### Packages Used
 ----
