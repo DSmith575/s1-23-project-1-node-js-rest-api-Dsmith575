@@ -6,7 +6,7 @@ This uses information from the video game Another Eden as the basis for my proje
 
 ### Installation
 ----
-* Clone the repo [here](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)
+* Clone the repository [here](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)
 
 ### Initial Setup
 ----
