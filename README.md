@@ -41,6 +41,9 @@ Can also use
 `npm run test` To run unit tests
 
 ### API Endpoints
+```js
+localhost:3000/
+```
 ----
 | `localhost:[PORT]` | api/v1 | Endpoint |
 | --- | --- | --- |
@@ -61,6 +64,7 @@ Can also use
 ### Examples
 ----
 
+Will display all available endpoints
 
 ### Packages Used
 ----
