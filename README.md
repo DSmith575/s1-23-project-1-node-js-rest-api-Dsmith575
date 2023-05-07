@@ -188,4 +188,6 @@ localhost:3000/
 [Prisma relations](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)  
 [Chai documentation](https://www.chaijs.com/guide/)  
 [Chai assertion](https://www.chaijs.com/guide/styles/)  
-[Mocha documentation](https://mochajs.org/api/mocha)
+[Mocha documentation](https://mochajs.org/api/mocha)  
+[Lecture Notes](https://github.com/otago-polytechnic-bit-courses/ID607001-intro-app-dev-concepts)
+[Markdown](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
