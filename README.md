@@ -6,11 +6,11 @@ This uses information from the video game Another Eden as the basis for my proje
 
 ### Installation
 ----
-* Clone the repo [here](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)  
-* Run `npm install` to install all dependencies 
+* Clone the repo [here](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)
 
 ### Initial Setup
 ----
+* Run `npm install` to install all dependencies 
 * Create a .env file in the root directory  
 * In the env use `PORT=3000`  
 * Create a .env.development file in the root directory  
