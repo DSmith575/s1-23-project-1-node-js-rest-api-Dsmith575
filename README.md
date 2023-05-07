@@ -1,35 +1,46 @@
 # Project-1 API/API Testing
-----
+
+---
+
 ### Intro
+
 This API is designed for the Intro App Dev ID607001 Paper  
-This uses information from the video game Another Eden as the basis for my project.  
+This uses information from the video game Another Eden as the basis for my project.
 
 ### Installation
-----
-* Clone the [repository](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)
+
+---
+
+- Clone the [repository](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)
 
 ### Initial Setup
-----
-* Run `npm install` to install all dependencies 
-* Create a .env file in the root directory  
-* In the env use `PORT=3000`  
-* Create a .env.development file in the root directory  
-* Create a .env.testing file in the root directory  
-* Run `npm run migrate` To migrate the db  
-* Save if auto-save isn't turned on
 
-#### .env.development  
+---
+
+- Run `npm install` to install all dependencies
+- Create a .env file in the root directory
+- In the env use `PORT=3000`
+- Create a .env.development file in the root directory
+- Create a .env.testing file in the root directory
+- Run `npm run migrate` To migrate the db
+- Save if auto-save isn't turned on
+
+#### .env.development
+
 Place the following inside  
 `NODE_ENV=development`  
-`DATABASE_URL=file:./dev.db`  
+`DATABASE_URL=file:./dev.db`
 
-#### .env.testing  
+#### .env.testing
+
 Place the following inside  
 `NODE_ENV=testing`  
 `DATABASE_URL=file:./test.db`
 
 ### Script commands
-----
+
+---
+
 `npm run dev` Run in the dev environment  
 `npm run prisma` Runs in prisma studio
 `npm run format` To run the prettier format  
@@ -38,19 +49,21 @@ Can also use
 `npm run test` To run unit tests
 
 ### API Endpoints
+
 ```js
 localhost:3000/
 ```
-Will display a list of endpoints
-----
-| `localhost:[PORT]` | api/v1 | Endpoint |
-| --- | --- | --- |
-| PORT | /api/v1/ | characters |
-| PORT | /api/v1/ | attributes |
-| PORT | /api/v1/ | rarities |
-| PORT | /api/v1/ | affinities |
-| PORT | /api/v1/ | elements |
-| PORT | /api/v1/ | personalities |  
+
+## Will display a list of endpoints
+
+| `localhost:[PORT]` | api/v1   | Endpoint      |
+| ------------------ | -------- | ------------- |
+| PORT               | /api/v1/ | characters    |
+| PORT               | /api/v1/ | attributes    |
+| PORT               | /api/v1/ | rarities      |
+| PORT               | /api/v1/ | affinities    |
+| PORT               | /api/v1/ | elements      |
+| PORT               | /api/v1/ | personalities |
 
 `/api/v1/characters`  
 `/api/v1/attributes`  
@@ -60,20 +73,27 @@ Will display a list of endpoints
 `/api/v1/personalities`
 
 ### Example inputs
-----
+
+---
+
 `/characters`
+
 ```js
 "name": "Example name",
 "affinity": "Light",
 "description": "This is a character description"
-```  
+```
+
 `/rarities`
+
 ```js
 "rarity": 3,
 "className": "Warrior",
 "characterId": 1
-```  
+```
+
 `/affinities`
+
 ```js
   "bonus5": "SPD +5",
   "bonus15": "PWR +10",
@@ -92,8 +112,11 @@ Will display a list of endpoints
 ```
 
 ### Example Ouputs
-----
+
+---
+
 `/characters`
+
 ```js
         {
             "id": 6,
@@ -109,6 +132,7 @@ Will display a list of endpoints
 ```
 
 `/rarities`
+
 ```js
             "character": {
                 "name": "Violet Lancer"
@@ -120,6 +144,7 @@ Will display a list of endpoints
 ```
 
 `/attributes`
+
 ```js
   {
             "character": {
@@ -138,22 +163,26 @@ Will display a list of endpoints
 ```
 
 ### Packages Used
-----
-* NodeJS  
-* Prisma  
-* Dotenv  
-* Joi  
-* Express  
-* Nodemon  
-* Commitizen
-* Mocha  
-* Chai  
-* Prettier
+
+---
+
+- NodeJS
+- Prisma
+- Dotenv
+- Joi
+- Express
+- Nodemon
+- Commitizen
+- Mocha
+- Chai
+- Prettier
 
 ### References
-----
+
+---
+
 [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-schema)  
 [Prisma relations](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)  
 [Chai documentation](https://www.chaijs.com/guide/)  
 [Chai assertion](https://www.chaijs.com/guide/styles/)  
-[Mocha documentation](https://mochajs.org/api/mocha)  
+[Mocha documentation](https://mochajs.org/api/mocha)
