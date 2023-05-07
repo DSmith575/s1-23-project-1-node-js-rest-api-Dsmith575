@@ -111,55 +111,58 @@ localhost:3000/
   "bonus255": "All Stats +10"
 ```
 
-### Example Ouputs
+### Example Outputs
 
 ---
 
 `/characters`
 
 ```js
-        {
-            "id": 6,
-            "name": "Abc",
-            "description": "Test",
-            "rarity": [],
-            "element": [],
-            "personality": [],
-            "affinity": "Light",
-            "affinityBonus": null,
-            "attributes": null
+{
+    "id": 6,
+    "name": "Abc",
+    "description": "Test",
+    "rarity": [],
+    "element": [],
+    "personality": [],
+    "affinity": "Light",
+    "affinityBonus": null,
+    "attributes": null
 },
 ```
 
 `/rarities`
 
 ```js
-            "character": {
-                "name": "Violet Lancer"
-            },
-            "rarity": 5,
-            "className": "Persephone",
-            "characterId": 5
-        }
+{
+    "character": 
+    {
+        "name": "Violet Lancer"
+    },
+    "rarity": 5,
+    "className": "Persephone",
+    "characterId": 5
+}
 ```
 
 `/attributes`
 
 ```js
-  {
-            "character": {
-                "name": "Violet Lancer"
-            },
-            "characterId": 5,
-            "hp": 4044,
-            "mp": 413,
-            "pwr": 286,
-            "int": 146,
-            "spd": 272,
-            "end": 214,
-            "spr": 178,
-            "lck": 205
-        }
+{
+    "character": 
+    {
+        "name": "Violet Lancer"
+    },
+    "characterId": 5,
+    "hp": 4044,
+    "mp": 413,
+    "pwr": 286,
+    "int": 146,
+    "spd": 272,
+    "end": 214,
+    "spr": 178,
+    "lck": 205
+}
 ```
 
 ### Packages Used
