@@ -1,5 +1,4 @@
 # Project-1 API/API Testing
-{:toc}
 ---
 
 ### Intro
