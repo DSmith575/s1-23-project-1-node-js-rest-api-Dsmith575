@@ -9,6 +9,8 @@
       - [Setting up the dev environment](#envdevelopment)
       - [Setting up the test environment](#envtesting)
   * [Script commands](#script-commands)
+  * [Dev Environment](#dev-environment)
+  * [Running Tests](#test-environment)
   * [API Endpoints](#api-endpoints)
   * [Example Inputs](#example-inputs)
   * [Example Outputs](#example-outputs)
@@ -62,6 +64,14 @@ Place the following inside
 `npm run format` To run the prettier format  
 Can also use  
 `npm run p:write` `npm run p:check` to run the pretty-quick & prettier check commands  
+
+<!-- TOC --><a name="dev-environment"></a>
+## Dev Environment
+`npm run dev` to Run the dev environment, for accessing API with postman
+
+<!-- TOC --><a name="test-environment"></a>
+## Running Unit-tests
+`npm run test` To run all unit tests
 
 <!-- TOC --><a name="api-endpoints"></a>
 ## API Endpoints
