@@ -108,20 +108,20 @@ localhost:3000/
 `/affinities`
 
 ```js
-  "bonus5": "SPD +5",
-  "bonus15": "PWR +10",
-  "bonus30": "INT + 3",
-  "bonus50": "END + 10",
-  "bonus75": "LCK + 40",
-  "bonus80": "Skill Slot +1",
-  "bonus105": "SPD + 20",
-  "bonus120": "PWR + 20",
-  "bonus140": "Grasta Slot +1",
-  "bonus175": "INT + 2",
-  "bonus200": "HP + 300",
-  "bonus215": "MP + 200",
-  "bonus225": "Badge Slot +1",
-  "bonus255": "All Stats +10"
+"bonus5": "SPD +5",
+"bonus15": "PWR +10",
+"bonus30": "INT + 3",
+"bonus50": "END + 10",
+"bonus75": "LCK + 40",
+"bonus80": "Skill Slot +1",
+"bonus105": "SPD + 20",
+"bonus120": "PWR + 20",
+"bonus140": "Grasta Slot +1",
+"bonus175": "INT + 2",
+"bonus200": "HP + 300",
+"bonus215": "MP + 200",
+"bonus225": "Badge Slot +1",
+"bonus255": "All Stats +10"
 ```
 
 <!-- TOC --><a name="example-outputs"></a>
