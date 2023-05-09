@@ -7,7 +7,7 @@
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
  * @created: 2023-04-19
- * @updated: 2023-05-04
+ * @updated: 2023-05-10
  */
 
 import { PrismaClient } from "@prisma/client";
@@ -178,13 +178,9 @@ const getPersonalities = async (req, res) => {
     }
 
     const hasNextPage = personalities.length === Number(amount);
-    return res.json({
-      data: personalities,
-      nextPage: hasNextPage ? Number(page) + 1 : null,
-    });
 
     return res.json({
-      data: affinities,
+      data: personalities,
       nextPage: hasNextPage ? Number(page) + 1 : null,
     });
   } catch (err) {

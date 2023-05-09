@@ -3,11 +3,11 @@
  *
  * This controller handles CRUD operations related to affinity creation
  *
- * @file: affinities.js
+ * @file: completeCharacter-test.js
  * @version: 1.0.0
  * @author: Deacon Smith <SMITDE5@student.op.ac.nz>
- * @created: 2023-04-17
- * @updated: 2023-05-04
+ * @created: 2023-05-02
+ * @updated: 2023-05-10
  */
 
 process.env.NODE_ENV = "testing";

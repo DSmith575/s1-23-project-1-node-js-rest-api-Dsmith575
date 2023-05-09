@@ -12,7 +12,6 @@ model Character {
   name          String
   rarity        Rarity[]
   element       Element[]
-  // weaponType    WeaponType?
   affinity      String
   personality   Personality[]
   description   String
@@ -75,47 +74,3 @@ model Personality {
   character       Character @relation(fields: [characterId], references: [id])
   characterId     Int
 }
-
-// model WeaponType {
-//   id          Int       @id @default(autoincrement())
-//   weapon      String
-//   skillType   String
-//   character   Character @relation(references: [id], fields: [characterId])
-//   characterId Int
-// }
-
-// model AccessoryType {
-//   id          Int       @id @default(autoincrement())
-//   accessory   String
-//   character   Character @relation(fields: [characterId], references: [id])
-//   characterId Int @unique
-// }
-
-// const validWeaponValues = ["Staff", "Sword", "Katana", "Axe", "Spear", "Bow", "Fist", "Hammer"];
-// model Weapons {
-// id
-// name
-// skillType
-// weaponType WeaponType @relation
-// weaponId
-// 
-//}
-
-// const validAccessoryType = ["Bangle", "Necklace", "Ring"]
-
-
-// Validate weapon value before creating a new Character
-// if (!validWeaponValues.includes(newCharacter.weapon)) {
-//   throw new Error(`Invalid weapon value: ${newCharacter.weapon}`);
-// }
-
-// // Update weapon value for an existing Character
-// if (!validWeaponValues.includes(updatedCharacter.weapon)) {
-//   throw new Error(`Invalid weapon value: ${updatedCharacter.weapon}`);
-// }
-
-
-
-// Add filter, sorting, pagination for raritys/personalities
-
-//finish testing
