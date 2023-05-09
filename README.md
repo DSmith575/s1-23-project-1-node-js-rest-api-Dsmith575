@@ -14,6 +14,7 @@
   - [Script commands](#script-commands)
   - [Dev Environment](#dev-environment)
   - [Running Tests](#test-environment)
+  - [Format Code](#prettier)
   - [API Endpoints](#api-endpoints)
   - [Example Inputs](#example-inputs)
   - [Example Outputs](#example-outputs)
@@ -88,6 +89,16 @@ Can also use
 
 `npm run test` To run all unit tests
 
+<!-- TOC --><a name="prettier"></a>
+
+## Formating Code (Prettier)
+
+`npm run format` Will format code using prettier
+Other options
+`npm run p:check`
+`npm run p:write`
+
+
 <!-- TOC --><a name="api-endpoints"></a>
 
 ## API Endpoints
@@ -100,12 +111,12 @@ localhost:3000/
 
 | `localhost:[PORT]` | api/v1   | Endpoint      |
 | ------------------ | -------- | ------------- |
-| PORT               | /api/v1/ | characters    |
-| PORT               | /api/v1/ | attributes    |
-| PORT               | /api/v1/ | rarities      |
-| PORT               | /api/v1/ | affinities    |
-| PORT               | /api/v1/ | elements      |
-| PORT               | /api/v1/ | personalities |
+|                | /api/v1/ | characters    |
+|                | /api/v1/ | attributes    |
+|                | /api/v1/ | rarities      |
+|                | /api/v1/ | affinities    |
+|                | /api/v1/ | elements      |
+|                | /api/v1/ | personalities |
 
 `/api/v1/characters`  
 `/api/v1/attributes`  
