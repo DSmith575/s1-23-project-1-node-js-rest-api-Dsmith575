@@ -29,6 +29,7 @@ describe("pagination", () => {
       .get(`${BASE_URL}/v1/characters`)
       .end((__, paginationRes) => {
         chai.expect(paginationRes.status).to.be.equal(200);
+        chai.expect(paginationRes.body).to.be.a("object");
         chai.expect(paginationRes.body.nextPage).to.equal(2);
         done();
       });
@@ -40,6 +41,8 @@ describe("pagination", () => {
       .get(`${BASE_URL}/v1/characters`)
       .end((__, paginationRes) => {
         chai.expect(paginationRes.status).to.be.equal(200);
+        chai.expect(paginationRes.body).to.be.a("object");
+
         chai.expect(paginationRes.body.data).to.have.lengthOf(10);
         done();
       });
@@ -50,6 +53,8 @@ describe("pagination", () => {
       .get(`${BASE_URL}/v1/characters?sortBy=name&sortOrder=asc`)
       .end((__, paginationRes) => {
         chai.expect(paginationRes.status).to.be.equal(200);
+        chai.expect(paginationRes.body).to.be.a("object");
+
         chai.expect(paginationRes.body.data[0].name).to.be.equal("Abc");
         done();
       });
@@ -60,19 +65,34 @@ describe("pagination", () => {
       .get(`${BASE_URL}/v1/characters?sortBy=name&sortOrder=desc`)
       .end((__, paginationRes) => {
         chai.expect(paginationRes.status).to.be.equal(200);
+        chai.expect(paginationRes.body).to.be.a("object");
+
         chai.expect(paginationRes.body.data[0].name).to.be.equal("wxyz");
         done();
       });
   });
 
-  it("should contain the attribute field", (done) => {
+  it("should contain the field name", (done) => {
     chai
       .request(app)
       .get(`${BASE_URL}/v1/characters/10`)
       .end((__, paginationRes) => {
-        chai.expect(paginationRes.body.data).to.include("attribute");
+        chai.expect(paginationRes.status).to.be.equal(200);
+        chai.expect(paginationRes.body).to.be.a("object");
+        chai.expect(paginationRes.body.data).to.have.property("name");
         done();
       });
   });
 
+  it("should contain the field element", (done) => {
+    chai
+      .request(app)
+      .get(`${BASE_URL}/v1/characters/10`)
+      .end((__, paginationRes) => {
+        chai.expect(paginationRes.status).to.be.equal(200);
+        chai.expect(paginationRes.body).to.be.a("object");
+        chai.expect(paginationRes.body.data).to.have.property("element");
+        done();
+      });
+  });
 });

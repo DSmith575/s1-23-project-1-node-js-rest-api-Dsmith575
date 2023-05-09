@@ -1,36 +1,44 @@
 <!-- TOC --><a name="project-1-apiapi-testing"></a>
-# Project-1 API/API Testing  
+
+# Project-1 API/API Testing
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
 ## Table of Contents
+
 - [About](#about)
-  * [Installation](#installation)
-  * [Initial Setup](#initial-setup)
-      - [Setting up the dev environment](#envdevelopment)
-      - [Setting up the test environment](#envtesting)
-  * [Script commands](#script-commands)
-  * [Dev Environment](#dev-environment)
-  * [Running Tests](#test-environment)
-  * [API Endpoints](#api-endpoints)
-  * [Example Inputs](#example-inputs)
-  * [Example Outputs](#example-outputs)
-  * [Packages Used](#packages-used)
-  * [References](#references)
+  - [Installation](#installation)
+  - [Initial Setup](#initial-setup)
+    - [Setting up the dev environment](#envdevelopment)
+    - [Setting up the test environment](#envtesting)
+  - [Script commands](#script-commands)
+  - [Dev Environment](#dev-environment)
+  - [Running Tests](#test-environment)
+  - [API Endpoints](#api-endpoints)
+  - [Example Inputs](#example-inputs)
+  - [Example Outputs](#example-outputs)
+  - [Packages Used](#packages-used)
+  - [References](#references)
 
 <!-- TOC end -->
 
 <!-- TOC --><a name="about"></a>
+
 # About
+
 This API is designed for the Intro App Dev ID607001 Paper  
 To create an API and implement CRUD functionality and testing
 This uses information from the video game Another Eden as the basis for my project.  
 Character information gathered from the [wiki](https://anothereden.wiki/w/Characters) & In-game
 
 <!-- TOC --><a name="installation"></a>
+
 ## Installation
+
 - Clone the [repository](https://github.com/otago-polytechnic-bit-courses/s1-23-id607001-project-1-node-js-rest-api-DSmith575.git)
 
 <!-- TOC --><a name="initial-setup"></a>
+
 ## Initial Setup
 
 - Run `npm install` to install all dependencies
@@ -42,6 +50,7 @@ Character information gathered from the [wiki](https://anothereden.wiki/w/Charac
 - Save if auto-save isn't turned on
 
 <!-- TOC --><a name="envdevelopment"></a>
+
 #### .env.development
 
 Place the following inside  
@@ -49,6 +58,7 @@ Place the following inside
 `DATABASE_URL=file:./dev.db`
 
 <!-- TOC --><a name="envtesting"></a>
+
 #### .env.testing
 
 Place the following inside  
@@ -56,6 +66,7 @@ Place the following inside
 `DATABASE_URL=file:./test.db`
 
 <!-- TOC --><a name="script-commands"></a>
+
 ## Script commands
 
 `npm run dev` Run in the dev environment  
@@ -63,23 +74,29 @@ Place the following inside
 `npm run test` To run unit tests  
 `npm run format` To run the prettier format  
 Can also use  
-`npm run p:write` `npm run p:check` to run the pretty-quick & prettier check commands  
+`npm run p:write` `npm run p:check` to run the pretty-quick & prettier check commands
 
 <!-- TOC --><a name="dev-environment"></a>
+
 ## Dev Environment
+
 `npm run dev` to Run the dev environment, for accessing API with postman
 
 <!-- TOC --><a name="test-environment"></a>
+
 ## Running Unit-tests
+
 `npm run test` To run all unit tests
 
 <!-- TOC --><a name="api-endpoints"></a>
+
 ## API Endpoints
+
 #### Will display route list
+
 ```js
 localhost:3000/
 ```
-
 
 | `localhost:[PORT]` | api/v1   | Endpoint      |
 | ------------------ | -------- | ------------- |
@@ -98,7 +115,9 @@ localhost:3000/
 `/api/v1/personalities`
 
 <!-- TOC --><a name="example-inputs"></a>
+
 ## Example Inputs
+
 `/characters`
 
 ```js
@@ -135,7 +154,9 @@ localhost:3000/
 ```
 
 <!-- TOC --><a name="example-outputs"></a>
+
 ## Example Outputs
+
 `/characters`
 
 ```js
@@ -156,7 +177,7 @@ localhost:3000/
 
 ```js
 {
-    "character": 
+    "character":
     {
         "name": "Violet Lancer"
     },
@@ -170,7 +191,7 @@ localhost:3000/
 
 ```js
 {
-    "character": 
+    "character":
     {
         "name": "Violet Lancer"
     },
@@ -187,7 +208,9 @@ localhost:3000/
 ```
 
 <!-- TOC --><a name="packages-used"></a>
+
 ## Packages Used
+
 - NodeJS
 - Prisma
 - Dotenv
@@ -200,7 +223,9 @@ localhost:3000/
 - Prettier
 
 <!-- TOC --><a name="references"></a>
+
 ## References
+
 [Prisma documentation](https://www.prisma.io/docs/concepts/components/prisma-schema)  
 [Prisma relations](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)  
 [Chai documentation](https://www.chaijs.com/guide/)  
