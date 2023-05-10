@@ -98,7 +98,6 @@ Other options
 `npm run p:check`
 `npm run p:write`
 
-
 <!-- TOC --><a name="api-endpoints"></a>
 
 ## API Endpoints
@@ -111,12 +110,12 @@ localhost:3000/
 
 | `localhost:[PORT]` | api/v1   | Endpoint      |
 | ------------------ | -------- | ------------- |
-|                | /api/v1/ | characters    |
-|                | /api/v1/ | attributes    |
-|                | /api/v1/ | rarities      |
-|                | /api/v1/ | affinities    |
-|                | /api/v1/ | elements      |
-|                | /api/v1/ | personalities |
+|                    | /api/v1/ | characters    |
+|                    | /api/v1/ | attributes    |
+|                    | /api/v1/ | rarities      |
+|                    | /api/v1/ | affinities    |
+|                    | /api/v1/ | elements      |
+|                    | /api/v1/ | personalities |
 
 `/api/v1/characters`  
 `/api/v1/attributes`  

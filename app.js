@@ -22,12 +22,12 @@ const PORT = process.env.PORT;
 app.use(urlencoded({ extended: false }));
 app.use(json());
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000, // 15 minutes
-//   max: 5, // limit each IP to 100 requests per windowMs
-// });
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
 
-// app.use(limiter);
+app.use(limiter);
 
 app.use(`/${BASE_URL}/${VERSION}/characters`, characters);
 app.use(`/${BASE_URL}/${VERSION}/attributes`, attributes);
