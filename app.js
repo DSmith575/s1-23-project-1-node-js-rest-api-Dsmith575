@@ -41,12 +41,12 @@ app.use(`/${BASE_URL}/${VERSION}/personalities`, personality);
 app.get("/", (req, res) => {
   return res.json({
     endpoints: [
-      `http://localhost:3000/${BASE_URL}/${VERSION}/characters`,
-      `http://localhost:3000/${BASE_URL}/${VERSION}/attributes`,
-      `http://localhost:3000/${BASE_URL}/${VERSION}/rarities`,
-      `http://localhost:3000/${BASE_URL}/${VERSION}/affinities`,
-      `http://localhost:3000/${BASE_URL}/${VERSION}/elements`,
-      `http://localhost:3000/${BASE_URL}/${VERSION}/personalities`,
+      `${BASE_URL}/${VERSION}/characters`,
+      `${BASE_URL}/${VERSION}/attributes`,
+      `${BASE_URL}/${VERSION}/rarities`,
+      `${BASE_URL}/${VERSION}/affinities`,
+      `${BASE_URL}/${VERSION}/elements`,
+      `${BASE_URL}/${VERSION}/personalities`,
     ],
   });
 });
