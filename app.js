@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express, { urlencoded, json } from "express";
 import { loadEnv } from "./loadEnv.cjs";
 import rateLimit from "express-rate-limit";
+import cors from "cors";
 
 import characters from "./routes/characters.js";
 import attributes from "./routes/attributes.js";
@@ -21,6 +22,7 @@ const PORT = process.env.PORT;
 
 app.use(urlencoded({ extended: false }));
 app.use(json());
+app.use(cors());
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
