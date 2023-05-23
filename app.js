@@ -29,7 +29,7 @@ app.use(cors());
 //   max: 100, // limit each IP to 100 requests per windowMs
 // });
 
-app.use(limiter);
+// app.use(limiter);
 
 app.use(`/${BASE_URL}/${VERSION}/characters`, characters);
 app.use(`/${BASE_URL}/${VERSION}/attributes`, attributes);
