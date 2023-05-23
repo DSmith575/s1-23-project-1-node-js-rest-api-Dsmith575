@@ -238,15 +238,15 @@ const createCharacter = async (req, res) => {
       });
     }
 
-    await prisma.character.create({
+    const newCharacter = await prisma.character.create({
       data: { name, description, affinity },
     });
 
-    const newCharacters = await prisma.character.findMany({});
+    // const newCharacters = await prisma.character.findMany({});
 
     return res.status(201).json({
       msg: "Character successfully created",
-      data: newCharacters,
+      data: newCharacter,
     });
   } catch (err) {
     return res.status(500).json({
