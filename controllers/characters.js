@@ -232,7 +232,7 @@ const createCharacter = async (req, res) => {
       },
     });
 
-    if (existingCharacter) {
+    if (!existingCharacter) {
       return res.status(409).json({
         msg: `Character with the name ${name} already exists in the database`,
       });
