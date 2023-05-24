@@ -227,7 +227,7 @@ const createCharacter = async (req, res) => {
     const existingCharacter = await prisma.character.findFirst({
       where: {
         name: {
-          contains: name.toLowerCase(), // Perform case-insensitive search
+          contains: name.toLowerCase() || name, // Perform case-insensitive search
         },
       },
     });
