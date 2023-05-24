@@ -227,12 +227,12 @@ const createCharacter = async (req, res) => {
     const existingCharacter = await prisma.character.findFirst({
       where: {
         name: {
-          contains: name.toLowerCase() || name, // Perform case-insensitive search
+          contains: name.toLowerCase(), // Perform case-insensitive search
         },
       },
     });
 
-    if (!existingCharacter) {
+    if (existingCharacter) {
       return res.status(409).json({
         msg: `Character with the name ${name} already exists in the database`,
       });
