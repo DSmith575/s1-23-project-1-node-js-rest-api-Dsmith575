@@ -83,6 +83,7 @@ const getElements = async (req, res) => {
         [sortBy]: sortOrder,
       },
       select: {
+        id: true,
         character: {
           select: {
             name: true,
