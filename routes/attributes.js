@@ -22,10 +22,6 @@ import {
 } from "../controllers/attributes.js";
 
 router.route("/").get(getAttributes).post(createAttribute);
-router
-  .route("/:id")
-  .get(getAttribute)
-  .put(updateAttribute)
-  .delete(deleteAttribute);
+router.route("/:id").get(getAttribute).put(updateAttribute).delete(deleteAttribute);
 
 export default router;

@@ -53,9 +53,7 @@ const getElement = async (req, res) => {
     });
 
     if (!element) {
-      return res
-        .status(200)
-        .json({ msg: `No element with the id: ${id} found` });
+      return res.status(200).json({ msg: `No element with the id: ${id} found` });
     }
 
     return res.json({
@@ -223,9 +221,7 @@ const deleteElement = async (req, res) => {
     });
 
     if (!element) {
-      return res
-        .status(200)
-        .json({ msg: `No element with the id: ${id} found` });
+      return res.status(200).json({ msg: `No element with the id: ${id} found` });
     }
 
     await prisma.element.delete({

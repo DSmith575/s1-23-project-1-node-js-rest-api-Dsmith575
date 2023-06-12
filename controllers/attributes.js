@@ -40,9 +40,7 @@ const getAttribute = async (req, res) => {
     });
 
     if (!attribute) {
-      return res
-        .status(200)
-        .json({ msg: `No attribute with the id: ${id} found` });
+      return res.status(200).json({ msg: `No attribute with the id: ${id} found` });
     }
 
     return res.json({
@@ -211,9 +209,7 @@ const deleteAttribute = async (req, res) => {
     });
 
     if (!attribute) {
-      return res
-        .status(200)
-        .json({ msg: `No attribute with the id: ${id} found` });
+      return res.status(200).json({ msg: `No attribute with the id: ${id} found` });
     }
 
     await prisma.attribute.delete({

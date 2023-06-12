@@ -46,9 +46,7 @@ const getAffinity = async (req, res) => {
     });
 
     if (!affinity) {
-      return res
-        .status(200)
-        .json({ msg: `No affinity with the id : ${id} found` });
+      return res.status(200).json({ msg: `No affinity with the id : ${id} found` });
     }
 
     return res.json({
@@ -257,9 +255,7 @@ const deleteAffinity = async (req, res) => {
     });
 
     if (!affinity) {
-      return res
-        .status(200)
-        .json({ msg: `No affinity with the id: ${id} found` });
+      return res.status(200).json({ msg: `No affinity with the id: ${id} found` });
     }
 
     await prisma.affinity_bonus.delete({

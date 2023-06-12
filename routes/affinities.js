@@ -22,10 +22,6 @@ import {
 } from "../controllers/affinities.js";
 
 router.route("/").get(getAffinities).post(createAffinities);
-router
-  .route("/:id")
-  .get(getAffinity)
-  .put(updatedAffinity)
-  .delete(deleteAffinity);
+router.route("/:id").get(getAffinity).put(updatedAffinity).delete(deleteAffinity);
 
 export default router;

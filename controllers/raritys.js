@@ -215,9 +215,7 @@ const deleteRarity = async (req, res) => {
     });
 
     if (!rarity) {
-      return res
-        .status(200)
-        .json({ msg: `No rarity with the id: ${id} found` });
+      return res.status(200).json({ msg: `No rarity with the id: ${id} found` });
     }
 
     await prisma.rarity.delete({

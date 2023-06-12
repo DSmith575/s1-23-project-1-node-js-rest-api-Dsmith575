@@ -217,9 +217,7 @@ describe("characters", () => {
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(400);
         chai.expect(characterRes.body).to.be.a("object");
-        chai
-          .expect(characterRes.body.msg)
-          .to.be.equal('"affinity" is required');
+        chai.expect(characterRes.body.msg).to.be.equal('"affinity" is required');
         done();
       });
   });
@@ -232,9 +230,7 @@ describe("characters", () => {
       .end((__, characterRes) => {
         chai.expect(characterRes.status).to.be.equal(400);
         chai.expect(characterRes.body).to.be.a("object");
-        chai
-          .expect(characterRes.body.msg)
-          .to.be.equal('"description" is required');
+        chai.expect(characterRes.body.msg).to.be.equal('"description" is required');
         done();
       });
   });

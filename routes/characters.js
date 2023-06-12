@@ -22,10 +22,6 @@ import {
 } from "../controllers/characters.js";
 
 router.route("/").get(getCharacters).post(createCharacter);
-router
-  .route("/:id")
-  .get(getCharacter)
-  .put(updateCharacter)
-  .delete(deleteCharacter);
+router.route("/:id").get(getCharacter).put(updateCharacter).delete(deleteCharacter);
 
 export default router;

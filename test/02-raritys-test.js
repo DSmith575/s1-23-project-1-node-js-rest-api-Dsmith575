@@ -182,9 +182,7 @@ describe("rarities", () => {
         chai.expect(rarityRes.body).to.be.a("object");
         chai
           .expect(rarityRes.body.msg)
-          .to.be.equal(
-            "Rarity of 4 already exists for the character with the id 4"
-          );
+          .to.be.equal("Rarity of 4 already exists for the character with the id 4");
         done();
       });
   });

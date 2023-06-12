@@ -89,9 +89,7 @@ const getCharacter = async (req, res) => {
     });
 
     if (!character) {
-      return res
-        .status(200)
-        .json({ msg: `No Character with the id: ${id} found` });
+      return res.status(200).json({ msg: `No Character with the id: ${id} found` });
     }
 
     return res.json({
@@ -217,16 +215,16 @@ const createCharacter = async (req, res) => {
 
     if (!validAffinities.includes(affinity)) {
       return res.status(400).json({
-        msg: `Invalid affinity. Allowed values are ${validAffinities.join(
-          ", "
-        )}`,
+        msg: `Invalid affinity. Allowed values are ${validAffinities.join(", ")}`,
       });
     }
 
     //Check if a character already exists with the name trying to create
     const existingCharacter = await prisma.character.findFirst({
       where: {
-        name: name,
+        name: {
+          contains: name.toLowerCase(),
+        },
       },
     });
 
@@ -269,25 +267,43 @@ const updateCharacter = async (req, res) => {
     // Validate affinity
     if (!validAffinities.includes(affinity)) {
       return res.status(400).json({
-        msg: `Invalid affinity. Allowed values are ${validAffinities.join(
-          ", "
-        )}}`,
+        msg: `Invalid affinity. Allowed values are ${validAffinities.join(", ")}`,
       });
     }
 
-    //Check if a character already exists with the name trying to create
-    const existingCharacter = await prisma.character.findFirst({
+    const existingCharacter = await prisma.character.findUnique({
       where: {
-        name: {
-          contains: name.toLowerCase(), // Perform case-insensitive search
-        },
+        id: Number(id),
       },
     });
 
-    if (existingCharacter) {
-      return res.status(409).json({
-        msg: `Character with the name ${name} already exists in the database`,
+    if (!existingCharacter) {
+      return res.status(404).json({
+        msg: `Character with the id: ${id} not found`,
       });
+    }
+
+    if (existingCharacter.name !== name) {
+      const duplicateCharacter = await prisma.character.findFirst({
+        where: {
+          OR: [
+            {
+              name: {
+                equals: name,
+              },
+            },
+            {
+              id: Number(id),
+            },
+          ],
+        },
+      });
+
+      if (duplicateCharacter) {
+        return res.status(409).json({
+          msg: `Character with the name ${name} already exists in the database`,
+        });
+      }
     }
 
     const updatedCharacter = await prisma.character.update({
@@ -315,9 +331,7 @@ const deleteCharacter = async (req, res) => {
     });
 
     if (!character) {
-      return res
-        .status(200)
-        .json({ msg: `No character with the id: ${id} found` });
+      return res.status(200).json({ msg: `No character with the id: ${id} found` });
     }
 
     await prisma.character.delete({
