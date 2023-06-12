@@ -11,7 +11,7 @@ model Character {
   id            Int             @id @default(autoincrement())
   name          String
   rarity        Rarity[]
-  element       Element[]
+  element       Element?
   affinity      String
   personality   Personality[]
   description   String
@@ -23,7 +23,7 @@ model Element {
   id           Int       @id @default(autoincrement())
   element     String
   character   Character @relation(fields: [characterId], references: [id])
-  characterId Int
+  characterId Int       @unique
 }
 
 model Attribute {

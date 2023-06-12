@@ -178,21 +178,21 @@ const updateElement = async (req, res) => {
 
     const { element, characterId } = value;
 
-    //Custom validation, checks if input is the same as the strings inside validElements, if not, shows all available options
     if (!validElements.includes(element)) {
       return res.status(400).json({
         msg: `Invalid element, accepted values are ${validElements.join(", ")}`,
       });
     }
 
-    //Custom validation, this checks if a character already has an element with the same name.
-    const existingElement = await prisma.element.findFirst({
-      where: { element: element, characterId: characterId },
+    const existingCharacter = await prisma.character.findUnique({
+      where: {
+        id: Number(id),
+      },
     });
 
-    if (existingElement) {
-      return res.status(409).json({
-        msg: `Element with the value ${element} already exists for the character with the id ${characterId}`,
+    if (!existingCharacter) {
+      return res.status(404).json({
+        msg: `Character with the id: ${id} not found`,
       });
     }
 
