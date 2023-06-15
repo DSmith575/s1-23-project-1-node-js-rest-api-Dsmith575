@@ -75,6 +75,9 @@ CREATE TABLE "Personality" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Element_characterId_key" ON "Element"("characterId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Attribute_characterId_key" ON "Attribute"("characterId");
 
 -- CreateIndex
