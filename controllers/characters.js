@@ -286,16 +286,13 @@ const updateCharacter = async (req, res) => {
     if (existingCharacter.name !== name) {
       const duplicateCharacter = await prisma.character.findFirst({
         where: {
-          OR: [
-            {
-              name: {
-                equals: name,
-              },
-            },
-            {
-              id: Number(id),
-            },
-          ],
+          name: {
+            equals: name,
+            mode: "insensitive",
+          },
+          NOT: {
+            id: Number(id),
+          },
         },
       });
 
